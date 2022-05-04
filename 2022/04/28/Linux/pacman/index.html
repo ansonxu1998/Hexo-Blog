@@ -25,7 +25,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/img/pacman/arch_logo.png">
 <meta property="article:published_time" content="2022-04-28T07:42:04.000Z">
-<meta property="article:modified_time" content="2022-04-28T08:19:54.013Z">
+<meta property="article:modified_time" content="2022-05-04T11:42:06.923Z">
 <meta property="article:author" content="Anson">
 <meta property="article:tag" content="note">
 <meta name="twitter:card" content="summary_large_image">
@@ -199,7 +199,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      3.3k 字
+      3.4k 字
     </span>
   
 
@@ -259,7 +259,7 @@ string)。目标可以作为命令行参数提供。</p>
 数据库中已安装软件包的某些属性。检查数据库内部一致性。</p></li>
 <li><p><strong>-Q，--query</strong></p>
 <p>查询包数据库。该操作可以查看已安装的包及其文件，以及关于单个包的元信息。这可以针对本地包数据库运行，可以用于单个包文件。</p></li>
-<li><p><strong>R，--remove</strong></p>
+<li><p><strong>-R，--remove</strong></p>
 <p>从系统中移除包。还可以指定要删除的组，在这种情况下，该组中的每个包都会被删除。属于指定包的文件将会被删除，数据库将会更新。</p></li>
 <li><p><strong>-S，--sync</strong></p>
 <p>同步包。包直接从远程仓库中安装，包括所需的所有依赖项。如果一个包名存在于多个仓库中，可以显示的指定仓库来确定需要安装的包。对于版本要求：<code>pacman -S "bash&gt;=3.2"</code>(需要使用双引号)。</p>
@@ -305,14 +305,14 @@ pacman
 <p>指定何时启动着色。选项有 [always, never, auto]。</p></li>
 <li><p><strong>--config</strong> <file></p>
 <p>指定配置文件</p></li>
-<li><p><strong>debug</strong></p>
+<li><p><strong>--debug</strong></p>
 <p>显示调试消息。当报告错误时，建议使用此选项。</p></li>
-<li><p><strong>gpgdir</strong></p>
+<li><p><strong>--gpgdir</strong></p>
 <dir>
 <p>指定 GnuPG
 校验包签名的文件目录(默认：<code>/etc/pacman.d/gnupg</code>)。这个目录应该包含两个文件：pubring.gpg
 和 trustdb.gpg。<strong>注意</strong>：这必须是一个绝对路径。</p></li>
-<li><p><strong>hookdir</strong></p>
+<li><p><strong>--hookdir</strong></p>
 <dir>
 <p>指定一个有钩子文件(hook
 files)的目录(默认：<code>/etc/pacman.d/hooks</code>)。可以指定多个钩子目录，使后面目录中的钩子优先于前面目录中的钩子。<strong>注意</strong>:这是一个绝对路径。</p></li>
@@ -409,6 +409,12 @@ target="_blank" rel="noopener" href="https://man.archlinux.org/man/pacman.8">pac
                 <div class="post-prevnext">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2022/05/04/Self-Driving/PathPlan/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">路径规划算法</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
