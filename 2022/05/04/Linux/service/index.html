@@ -24,14 +24,14 @@
 <meta property="og:description" content="Linux 服务 daemon与服务 系统为了某些功能必须要提供一些服务（系统本省或者网络方面），这个服务就成为service。service 的提供需要程序来运行，完成这个 service 的程序就称之为 daemon。  服务的名称被建立之后，在 Linux 中使用时，通常在服务的名称之后会加上一个d。  systemd systemd 全部就是仅有一个 systemd 服务搭配 system">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/img/service/status.png">
-<meta property="og:image" content="http://example.com/2022/05/04/Linux/service/img/service/target.png">
+<meta property="og:image" content="http://example.com/img/service/target.png">
 <meta property="og:image" content="http://example.com/img/service/dependencies.png">
 <meta property="og:image" content="http://example.com/img/service/sockets.png">
 <meta property="og:image" content="http://example.com/img/service/port%20number.png">
 <meta property="og:image" content="http://example.com/img/service/net%20port.png">
 <meta property="og:image" content="http://example.com/img/service/sshd.png">
 <meta property="article:published_time" content="2022-05-04T04:05:00.000Z">
-<meta property="article:modified_time" content="2022-05-15T01:33:10.787Z">
+<meta property="article:modified_time" content="2022-05-20T01:36:23.690Z">
 <meta property="article:author" content="Anson">
 <meta property="article:tag" content="note">
 <meta name="twitter:card" content="summary_large_image">
@@ -388,7 +388,7 @@ id="systemctl-管理单一服务service-unit-的启动开机启动与查看状�
 <h4 id="systemctl-管理不同的操作环境target-unit"><code>systemctl</code>
 管理不同的操作环境(<code>target unit</code>)</h4>
 <p><code>systemctl list-units --type=target --all</code>：</p>
-<p><img src="./img/service/target.png" srcset="/img/loading.gif" lazyload /></p>
+<p><img src="/img/service/target.png" srcset="/img/loading.gif" lazyload /></p>
 <p>与操作界面相关性较高的 <code>tatget</code> 有以下几个：</p>
 <ul>
 <li>graphical.target：命令加上图形界面，包含有 multi-user.target</li>
