@@ -1,0 +1,997 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Anson">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="消息格式 每个 MQTT 消息可能包含三个部分：  Fixed header(全部消息类型) Variable header(部分消息类型) Payload(部分消息类型)  Fixed header 每个 MQTT 消息类型都必须包含 fixed header. fixed header 的格式如下表所示：  Message Type(消息类型) Position：byte1，bits 7-4">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MQTT V3.1">
+<meta property="og:url" content="http://example.com/2022/06/18/IOT/Mqtt/index.html">
+<meta property="og:site_name" content="Anson Blog">
+<meta property="og:description" content="消息格式 每个 MQTT 消息可能包含三个部分：  Fixed header(全部消息类型) Variable header(部分消息类型) Payload(部分消息类型)  Fixed header 每个 MQTT 消息类型都必须包含 fixed header. fixed header 的格式如下表所示：  Message Type(消息类型) Position：byte1，bits 7-4">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/mqtt/fixed_header.PNG">
+<meta property="og:image" content="http://example.com/img/mqtt/QoS_level.PNG">
+<meta property="og:image" content="http://example.com/img/mqtt/protocol_version.PNG">
+<meta property="og:image" content="http://example.com/img/mqtt/connect_flags.PNG">
+<meta property="og:image" content="http://example.com/img/mqtt/keep_alive_timer.PNG">
+<meta property="og:image" content="http://example.com/img/mqtt/connect_return_code.PNG">
+<meta property="og:image" content="http://example.com/img/mqtt/return_code.PNG">
+<meta property="og:image" content="http://example.com/img/mqtt/Message_ID.PNG">
+<meta property="og:image" content="http://example.com/img/mqtt/MQTT_string.PNG">
+<meta property="og:image" content="http://example.com/img/mqtt/string_length.PNG">
+<meta property="og:image" content="http://example.com/img/mqtt/CONNECT_fixed_header.PNG">
+<meta property="og:image" content="http://example.com/img/mqtt/CONNECT_variable_header_1.PNG">
+<meta property="og:image" content="http://example.com/img/mqtt/CONNECT_variable_header_2.PNG">
+<meta property="og:image" content="http://example.com/img/mqtt/CONNACK_fixed_header.PNG">
+<meta property="og:image" content="http://example.com/img/mqtt/CONNACK_variable_header_1.PNG">
+<meta property="og:image" content="http://example.com/img/mqtt/CONNACK_variable_header_2.PNG">
+<meta property="og:image" content="http://example.com/img/mqtt/PUBLISH_fixed_header.PNG">
+<meta property="og:image" content="http://example.com/img/mqtt/PUBLISH_example.PNG">
+<meta property="og:image" content="http://example.com/img/mqtt/PUBACK_fixed_header.PNG">
+<meta property="og:image" content="http://example.com/img/mqtt/PUBACK_variable_header.PNG">
+<meta property="og:image" content="http://example.com/img/mqtt/PUBREC_fixed_header.PNG">
+<meta property="og:image" content="http://example.com/img/mqtt/PUBREC_variable_header.PNG">
+<meta property="og:image" content="http://example.com/img/mqtt/PUBREL_fixed_header.PNG">
+<meta property="og:image" content="http://example.com/img/mqtt/PUBREL_variable_header.PNG">
+<meta property="og:image" content="http://example.com/img/mqtt/PUBCOMP_fixed_header_1.PNG">
+<meta property="og:image" content="http://example.com/img/mqtt/PUBCOMP_fixed_header_2.PNG">
+<meta property="og:image" content="http://example.com/img/mqtt/PUBCOMP_variable_header.PNG">
+<meta property="og:image" content="http://example.com/img/mqtt/SUBSCRIBE_fixed_header.PNG">
+<meta property="og:image" content="http://example.com/img/mqtt/SUBSCRIBE_variable_header.PNG">
+<meta property="og:image" content="http://example.com/img/mqtt/SUBSCRIBE_payload.PNG">
+<meta property="og:image" content="http://example.com/img/mqtt/SUBACK_fixed_header.PNG">
+<meta property="og:image" content="http://example.com/img/mqtt/PUBCOMP_variable_header.PNG">
+<meta property="og:image" content="http://example.com/img/mqtt/UNSUBSCRIBE_fixed_header.PNG">
+<meta property="og:image" content="http://example.com/img/mqtt/UNSUBSCRIBE_variable_header.PNG">
+<meta property="og:image" content="http://example.com/img/mqtt/UNSUBSCRIBE_payload.PNG">
+<meta property="og:image" content="http://example.com/img/mqtt/UNSUBACK_fixed_header.PNG">
+<meta property="og:image" content="http://example.com/img/mqtt/PUBCOMP_variable_header.PNG">
+<meta property="og:image" content="http://example.com/img/mqtt/PINGREQ_fixed_header.PNG">
+<meta property="og:image" content="http://example.com/img/mqtt/PINGRESP_fixed_header_1.PNG">
+<meta property="og:image" content="http://example.com/img/mqtt/PINGRESP_fixed_header_2.PNG">
+<meta property="og:image" content="http://example.com/img/mqtt/DISCONNECT_fixed_header.PNG">
+<meta property="og:image" content="http://example.com/img/mqtt/QoS%201%20flow.png">
+<meta property="og:image" content="http://example.com/img/mqtt/QoS%202%20flow.png">
+<meta property="article:published_time" content="2022-06-18T12:30:03.000Z">
+<meta property="article:modified_time" content="2022-06-18T13:24:28.840Z">
+<meta property="article:author" content="Anson">
+<meta property="article:tag" content="手册">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/img/mqtt/fixed_header.PNG">
+  
+  
+  <title>MQTT V3.1 - Anson Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/arta.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":100,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Anson</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="MQTT V3.1">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-06-18 20:30" pubdate>
+        2022年6月18日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      7.8k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      65 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">MQTT V3.1</h1>
+            
+            <div class="markdown-body">
+              <h2 id="消息格式">消息格式</h2>
+<p>每个 MQTT 消息可能包含三个部分：</p>
+<ul>
+<li>Fixed header(全部消息类型)</li>
+<li>Variable header(部分消息类型)</li>
+<li>Payload(部分消息类型)</li>
+</ul>
+<h3 id="fixed-header">Fixed header</h3>
+<p>每个 MQTT 消息类型都必须包含 fixed header. fixed header
+的格式如下表所示：</p>
+<p><img src="/img/mqtt/fixed_header.PNG" srcset="/img/loading.gif" lazyload /></p>
+<h4 id="message-type消息类型">Message Type(消息类型)</h4>
+<p><strong>Position</strong>：byte1，bits 7-4</p>
+<ol start="0" type="1">
+<li>Reserved</li>
+<li>CONNECT</li>
+<li>CONNACK</li>
+<li>PUBLISH</li>
+<li>PUBACK</li>
+<li>PUBREC</li>
+<li>PUBREL</li>
+<li>PUBCOMP</li>
+<li>SUBSCRIBE</li>
+<li>SUBACK</li>
+<li>UNSUBSCRIBE</li>
+<li>UNSUBACK</li>
+<li>PINGREQ</li>
+<li>PINGRESP</li>
+<li>DISCONNECT</li>
+<li>Reserved</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c"><span class="hljs-class"><span class="hljs-keyword">enum</span> <span class="hljs-title">msgTypes</span>&#123;</span><br>    CONNECT = <span class="hljs-number">1</span>, CONNACK, PUBLISH, PUBACK, PUBREC, PUBREL, PUBCOMP, SUBSCRIBE, UNSUBSCRIBE, UNSUBACK, PINGREQ, PINGRESP, DISCONNECT<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<h4 id="flags标志位">Flags(标志位)</h4>
+<h5 id="dup">DUP</h5>
+<p><strong>Position</strong>: byte1， bit 3.</p>
+<p>当客户端或服务器试图重新发送时，设置次标志。</p>
+<p>注：只能用于 QoS 值大于 0
+的消息，并且需要一个确认(acknowledgment)。当 DUP 位被设置时，variable
+header 需要包含 Message ID。</p>
+<h5 id="qos">QoS</h5>
+<p><strong>Position</strong>：byte1，bits 2-1.</p>
+<p>该标志用于指示所发送的消息的保证级别。QoS 级别如下表：</p>
+<p><img src="/img/mqtt/QoS_level.PNG" srcset="/img/loading.gif" lazyload /></p>
+<h5 id="retain">RETAIN</h5>
+<p><strong>Position</strong>：byte1，bit 0.</p>
+<p>该标志只能用于 <code>PUBLISH</code>
+消息类型。当客户端向服务器发送一个 <code>PUBLISH</code> 消息时，如果
+<code>RETAIN</code> 标志设置为
+1，则服务器应该在将消息传递给订阅方之后，依然保存该消息。</p>
+<p>当一个 Topic 上建立了新的订阅时，且订阅方设置了 <code>RETAIN</code>
+标志位，服务器应该将最后保留的消息发送给该订阅方。若没有保留任何消息，则不发送消息。</p>
+<p>为了让客户端区分所接收到的消失是服务器保留的消息，还是服务器实时发布的消息。当原始
+<code>PUBLISH</code> 到达时已存在的订阅导致服务器向客户端发送
+<code>PUBLISH</code>时，不应使用 <code>RETAIN</code> 标志设置，不管原始
+PUBLISH 的保留标志。</p>
+<p>如果服务器接收到零长度 payload 的消息，并且在同一主题上设置了
+<code>RETAIN</code> 标志，则可以删除保留消息。</p>
+<h4 id="remaining-length">Remaining Length</h4>
+<p>表示当前消息中剩余的字节数，包括 variable header 和 payload
+中的数据。</p>
+<h3 id="variable-header">Variable header</h3>
+<p>某些类型的 MQTT 命令消息还包含一个 variable header。它位于 fixed
+header 和 payload 之间。</p>
+<p><code>Remaining Length</code> 字段的字节不影响 <code>Remaining</code>
+的字节计数长度值。该值只考虑 variable header 和 payload。</p>
+<p>variable header 字段的格式如下，它们必须按照顺序出现在报头中：</p>
+<h4 id="protocol-name">Protocol name</h4>
+<p>消息类型：<code>CONNECT</code></p>
+<p>该字段是一个 UTF-encoded 的字符串，表示协议名称 MQIsdp。</p>
+<h4 id="protocol-version">Protocol version</h4>
+<p>消息类型：<code>CONNECT</code></p>
+<p>该字段是一个8位无符号值，表示客户端使用的协议的修订级别。V3.1
+版本的协议表示如下：</p>
+<p><img src="/img/mqtt/protocol_version.PNG" srcset="/img/loading.gif" lazyload /></p>
+<h4 id="connect-flags">Connect flags</h4>
+<p>消息类型：<code>CONNECT</code></p>
+<p>标志位：<code>Clean session flag</code>、<code>Will</code>、<code>Will QoS</code>、<code>Retain flags</code></p>
+<p><img src="/img/mqtt/connect_flags.PNG" srcset="/img/loading.gif" lazyload /></p>
+<h5 id="clean-session-flag">Clean session flag</h5>
+<p><strong>Position</strong>：bit 1</p>
+<p>如果没有设置(0)，那么服务器在断开连接后必须存储客户端的订阅。这包括继续存储订阅主题的
+QoS 1 和 QoS 2
+消息，以便在客户端重新连接时交付它们。服务器还必须维护在连接丢失时传递的动态消息的状态。这个信息必须保存到客户端重新连接。</p>
+<p>如果设置为(1)，那么服务器必须丢弃之前维护的关于客户端的任何信息，并将连接视为“干净的”。当客户端断开连接时，服务器也必须丢弃任何状态。</p>
+<h5 id="will-flag">Will flag</h5>
+<p><strong>Position</strong>：bit 2</p>
+<p>Will message 是当服务器与客户端的连接意外发生中断(I/O错误，客户端在
+Keep Alive
+规定的时间内未能完成通信)时，由服务器代替客户端所发布的消息。</p>
+<p>如果设置了 <code>Will</code> 标志，那么 <code>Will QoS</code> 和
+<code>Will Retain</code> 标志必须出现在 <code>Connect flags</code>
+字段中。同时， <code>Will Topic</code> 和 <code>Will Message</code>
+字段也必须包含在 payload 中。</p>
+<h5 id="will-qos">Will QoS</h5>
+<p><strong>Position</strong>：bit 4，3</p>
+<p>设置 Will Message 的 QoS level，QoS level 同上，分为 3 级。</p>
+<h5 id="will-retain">Will Retain</h5>
+<p><strong>Position</strong>：bit 5</p>
+<p><code>Will Retain</code>
+标志表示在客户端意外断开连接的情况下，服务器是否应该保留由服务器代表客户端发布的Will消息。</p>
+<h5 id="user-name-and-password-flags">User name and password flags</h5>
+<p><strong>Position</strong>：bits 6，7</p>
+<p>连接的客户端可以指定用户名和密码，设置标志位表示用户名和密码(可选)包含在
+<code>CONNECT</code> 消息的 payload。</p>
+<p>如果设置了 <code>User Name</code> 标志位，则 <code>User Name</code>
+字段为必填字段，否则其值将被忽略。 如果设置了 <code>Password</code>
+标志，则 <code>Password</code> 字段是必须的，否则其值将被忽略。
+不提供用户名而提供密码是无效的。</p>
+<h4 id="keep-alive-timer">Keep Alive timer</h4>
+<p>消息类型：<code>CONNECT</code></p>
+<p>Keep
+Alive计时器(以秒为单位)定义了从客户端接收到的消息之间的最大时间间隔。它使用服务器能够检测到客户端断开连接，并且不必等待
+TCP/IP 连接超时。客户端必须在每个 Keep Alive
+时间段内发送消息。如果在该时间段内没有与数据相关的消息，则客户端发送一个
+<code>PINGREQ</code> 消息，服务器用 <code>PINGRESP</code>
+消息表示确认。</p>
+<p>Keep Alive
+定时器是一个16位的值，表示该时间周期的秒数。实际值与应用程序相关，但典型值是几分钟。最长约18小时。值为0(0)表示客户机没有断开连接。</p>
+<p>Keep Alive计时器的格式如下表所示。Keep Alive Timer 的 2 字节顺序是
+MSB，然后是 LSB (big-endian)。</p>
+<p><img src="/img/mqtt/keep_alive_timer.PNG" srcset="/img/loading.gif" lazyload /></p>
+<h4 id="connect-return-code">Connect return code</h4>
+<p>消息类型：<code>CONNACK</code></p>
+<p>该字段定义一个 1 字节无符号返回码。返回码如下表所示：</p>
+<p><img src="/img/mqtt/connect_return_code.PNG" srcset="/img/loading.gif" lazyload /></p>
+<p><img src="/img/mqtt/return_code.PNG" srcset="/img/loading.gif" lazyload /></p>
+<h4 id="topic-name">Topic name</h4>
+<p>消息类型：<code>PUBLISH</code></p>
+<p>主题名称是标识将有效负载数据发布到的信息通道的键。订阅方使用密钥来标识希望在其上接收发布信息的信息通道。</p>
+<p>主题名称是UTF-encoded 的字符串。主题名称的长度不超过32767个字符。</p>
+<h3 id="payload">Payload</h3>
+<h4 id="connect">CONNECT</h4>
+<p>Payload 包含一个或多个 UTF-8 encoded
+的字符串。它们为客户端指定一个唯一的标识符、一个Will主题和消息以及要使用的用户名和密码。除了第一个变量外，其他的都是可选的，它们的存在取决于变量头中的标志。</p>
+<h4 id="subscribe">SUBSCRIBE</h4>
+<p>Payload 包含客户端可以订阅的主题名称列表和QoS级别。这些字符串是
+UTF-encoded。</p>
+<h4 id="suback">SUBACK</h4>
+<p>Payload 包含授予的 QoS level 的列表。
+这些是服务端的管理员允许客户端订阅特定 Topic Name 的 QoS level。 授予的
+QoS 级别的列出顺序与对应的
+<code>SUBSCRIBE</code>消息中的主题名称相同。</p>
+<hr />
+<p><code>PUBLISH</code> 消息的 Payload
+部分只包含特定于应用程序的数据。没有对数据的性质或内容做任何假设，消息的这一部分被视为
+BLOB。</p>
+<h3 id="message-identifiers">Message identifiers</h3>
+<p>消息类型：<code>PUBLISH</code>,<code>PUBACK</code>,<code>PUBREC</code>,<code>PUBREL</code>,<code>PUBCOMP</code>,<code>SUBSCRIBE</code>,<code>SUBACK</code>,<code>UNSUBSCRIBE</code>,<code>UNSUBACK</code></p>
+<p>只有 QoS level 为 1 或 2 的消息才会有 Message ID。</p>
+<p>Message ID 是一个 16
+位无符号整数，在特定通信方向的“正在传输”消息集合中必须是唯一的。</p>
+<p>注：客户端将维护它自己的 Message IDs 列表，与它所连接的服务器使用的
+Message IDs 分开。客户端可以发送一个 Message ID 为 1 的
+<code>PUBLISH</code>，同时接收 Message ID 为 1
+的<code>PUBLISH</code>。</p>
+<p>Message Identifier 的两个字节顺序是 MSB，然后是 LSB(大端序)。</p>
+<p><img src="/img/mqtt/Message_ID.PNG" srcset="/img/loading.gif" lazyload /></p>
+<h3 id="mqtt-and-utf-8">MQTT and UTF-8</h3>
+<p>在MQTT中，字符串的前缀是两个字节，以表示长度，如下表所示。</p>
+<p><img src="/img/mqtt/MQTT_string.PNG" srcset="/img/loading.gif" lazyload /></p>
+<p>字符串长度是编码字符串的字节数，而不是字符数。例如，字符串OTWP使用UTF-8编码，如下表所示。</p>
+<p><img src="/img/mqtt/string_length.PNG" srcset="/img/loading.gif" lazyload /></p>
+<h2 id="命令报文">命令报文</h2>
+<h3 id="connect---客户端向服务器提交连接请求">CONNECT -
+客户端向服务器提交连接请求</h3>
+<p>当建立从客户机到服务器的 TCP/IP 套接字连接时，必须使用
+<code>CONNECT</code> 流创建一个协议级别的会话。</p>
+<h4 id="fixed-header-1">Fixed header</h4>
+<p><img src="/img/mqtt/CONNECT_fixed_header.PNG" srcset="/img/loading.gif" lazyload /></p>
+<p>Remaining Length 是可变报头的长度(12字节) 和 Payload
+的长度。这可以是一个多字节字段。</p>
+<h4 id="variable-header-1">Variable header</h4>
+<p><img src="/img/mqtt/CONNECT_variable_header_1.PNG" srcset="/img/loading.gif" lazyload /></p>
+<p><img src="/img/mqtt/CONNECT_variable_header_2.PNG" srcset="/img/loading.gif" lazyload /></p>
+<h4 id="payload-1">Payload</h4>
+<p><code>CONNECT</code> 消息的 payload
+包含一个或多个UTF-8编码的字符串，基于 variable header
+中的标志。如果存在字符串，则必须按以下顺序出现:</p>
+<h5 id="client-identifier">Client Identifier</h5>
+<p>UTF-encoded 字符串，长度在 1 - 23
+个字符之间，在所有连接到服务器的客户端中，ID 必须是唯一的。如果 ID
+字符超过 23 个，服务器将返回错误代码 2：Identifier Rejected.</p>
+<h5 id="will-topic">Will Topic</h5>
+<p>(如果 Will Flag 设置)第 2 个 UTF-8 encoding 字符串为 Will Topic。Will
+Message 将被发布到 Will Topic。</p>
+<h5 id="will-message">Will Message</h5>
+<p>(如果 Will Flag 设置)第 3 个 UTF-8 encoding 字符串为 Will
+Message。Will Message 定义了在客户端意外断开连接时发布到 Will Topic
+的消息的内容。这可能是一个零长度的消息。</p>
+<h5 id="user-name">User Name</h5>
+<p>(如果 User Name Flag 设置)第 4 个 UTF-8 encoding 字符串为 User
+Name。User Name 用于标识正在连接的用户的名称，用于认证。User Name
+的长度建议不超过12个字符。</p>
+<h5 id="password">Password</h5>
+<p>(如果 Password Flag 设置)第 5 个 UTF-8 encoding 字符串为
+Password。连接用户对应的密码，可用于认证。建议密码长度不超过12个字符。</p>
+<h4 id="response">Response</h4>
+<p>服务器发送 <code>CONNACK</code> 消息来响应来自客户端的
+<code>CONNECT</code> 消息。</p>
+<p>如果在 TCP/IP
+连接建立后，服务器在合理的时间内没有收到CONNECT消息，服务器应该关闭连接。</p>
+<p>如果客户端在合理的时间内没有收到来自服务器的 <code>CONNACK</code>
+消息，客户端应该关闭TCP/IP
+套接字连接，并通过打开一个新的套接字到服务器并发出 <code>CONNECT</code>
+消息来重新启动会话。</p>
+<p>如果具有相同客户端 ID 的客户端已经连接到服务器，在完成新客户端的
+<code>CONNECT</code> 流之前，服务器必须断开“旧的”客户端。</p>
+<h3 id="connack---确认连接请求">CONNACK - 确认连接请求</h3>
+<p><code>CONNACK</code> 消息是服务器响应客户端 <code>CONNECT</code>
+请求而发送的消息。</p>
+<h4 id="fiexed-header">Fiexed header</h4>
+<p><img src="/img/mqtt/CONNACK_fixed_header.PNG" srcset="/img/loading.gif" lazyload /></p>
+<h4 id="variable-header-2">Variable header</h4>
+<p><img src="/img/mqtt/CONNACK_variable_header_1.PNG" srcset="/img/loading.gif" lazyload /></p>
+<p><img src="/img/mqtt/CONNACK_variable_header_2.PNG" srcset="/img/loading.gif" lazyload /></p>
+<h4 id="payload-2">Payload</h4>
+<p>无</p>
+<h3 id="publish---发布消息">PUBLISH - 发布消息</h3>
+<p><code>PUBLISH</code>
+消息由客户机发送到服务器，分发给感兴趣的订阅者。每个
+<code>PUBLISH</code>
+消息都与一个主题名称(也称为主题或通道)相对应。发布到特定主题名称的消息将传递给该主题的连接订阅者。</p>
+<h4 id="fixed-header-2">Fixed header</h4>
+<p><img src="/img/mqtt/PUBLISH_fixed_header.PNG" srcset="/img/loading.gif" lazyload /></p>
+<h4 id="variable-header-3">Variable header</h4>
+<h5 id="topic-name-1">Topic name</h5>
+<p>一个 UTF-encoding 字符串。<font color='red'>不能包含 Topic
+通配符。</font>当使用通配符订阅的客户端接收到此字符串时，此字符串将是原始发布者指定的绝对主题，而不是客户端使用的订阅字符串。</p>
+<h5 id="message-id">Message ID</h5>
+<p><font color='geen'>用于具有 QoS level 1 和 QoS level 2
+的消息。</font></p>
+<p>下表显示了 <code>PUBLISH</code> 消息的一个示例 Variable header。</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Field</th>
+<th style="text-align: center;">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Topic Name:</td>
+<td style="text-align: center;">"a/b"</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">QoS level</td>
+<td style="text-align: center;">1</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Message ID:</td>
+<td style="text-align: center;">10</td>
+</tr>
+</tbody>
+</table>
+<p>本例中 Variable header 的格式如下表所示。</p>
+<p><img src="/img/mqtt/PUBLISH_example.PNG" srcset="/img/loading.gif" lazyload /></p>
+<h4 id="payload-3">Payload</h4>
+<p>包含要发布的数据。数据的内容和格式是应用程序特有的。</p>
+<h4 id="response-1">Response</h4>
+<p>对 <code>PUBLISH</code> 消息的响应取决于 QoS
+level。下表显示了预期的响应。</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">QoS Level</th>
+<th>Expected response</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">QoS 0</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">QoS 1</td>
+<td>PUBACK</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">QoS 2</td>
+<td>PUBREC</td>
+</tr>
+</tbody>
+</table>
+<h3 id="puback---发布确认">PUBACK - 发布确认</h3>
+<p><code>PUBACK</code> 消息是对 QoS level 1 的 <code>PUBLISH</code>
+消息的响应。服务器发送 <code>PUBACK</code> 消息以响应来自发布客户机的
+<code>PUBLISH</code> 消息，订阅者发送 <code>PUBACK</code>
+消息以响应来自服务器的<code>PUBLISH</code> 消息。</p>
+<h4 id="fixed-header-3">Fixed header</h4>
+<p><img src="/img/mqtt/PUBACK_fixed_header.PNG" srcset="/img/loading.gif" lazyload /></p>
+<h4 id="variable-header-4">Variable header</h4>
+<p>包含正在被确认的 <code>PUBLISH</code> 消息的消息标识符(Message
+ID)。下表显示了变量头文件的格式。</p>
+<p><img src="/img/mqtt/PUBACK_variable_header.PNG" srcset="/img/loading.gif" lazyload /></p>
+<h4 id="payload-4">Payload</h4>
+<p>无</p>
+<h4 id="actions">Actions</h4>
+<p>当客户端接收到 <code>PUBACK</code>
+消息时，它会丢弃原始消息，因为它也被服务器接收(并记录)。</p>
+<h3 id="pubrec---确认发布被接受">PUBREC - 确认发布被接受</h3>
+<p><code>PUBREC</code> 消息是对具有 QoS level 2 的 <code>PUBLISH</code>
+消息的响应。它是 QoS level 2 协议流的第二条消息。<code>PUBREC</code>
+消息由服务器发送，以响应来自发布客户机的 <code>PUBLISH</code>
+消息，或者由订阅方发送，以响应来自服务器的 <code>PUBLISH</code>
+消息。</p>
+<h4 id="fixed-header-4">Fixed header</h4>
+<p><img src="/img/mqtt/PUBREC_fixed_header.PNG" srcset="/img/loading.gif" lazyload /></p>
+<h4 id="variable-header-5">Variable header</h4>
+<p>Variable header 包含已确认的 <code>PUBLISH</code> 的 Message
+ID。下表显示了变量头文件的格式。</p>
+<p><img src="/img/mqtt/PUBREC_variable_header.PNG" srcset="/img/loading.gif" lazyload /></p>
+<h4 id="payload-5">Payload</h4>
+<p>无</p>
+<h4 id="actions-1">Actions</h4>
+<p>当接收到 <code>PUBREC</code> 消息时，接收方向发送方发送
+<code>PUBREL</code> 消息， Message ID 与 <code>PUBREC</code>
+消息相同。</p>
+<h3 id="pubrel---确认发布">PUBREL - 确认发布</h3>
+<p><code>PUBREL</code> 消息是发布方对来自服务器的 <code>PUBREC</code>
+消息的响应，或服务器对来自订阅方的<code>PUBREC</code> 消息的响应。它是
+QoS 2 协议流中的第三条消息。</p>
+<h4 id="fixed-header-5">Fixed header</h4>
+<p><img src="/img/mqtt/PUBREL_fixed_header.PNG" srcset="/img/loading.gif" lazyload /></p>
+<h4 id="variable-header-6">Variable header</h4>
+<p>Variable header 包含与被确认的 <code>PUBREC</code> 消息相同的 Message
+ID。下表显示了变量头文件的格式。</p>
+<p><img src="/img/mqtt/PUBREL_variable_header.PNG" srcset="/img/loading.gif" lazyload /></p>
+<h4 id="payload-6">Payload</h4>
+<p>无</p>
+<h4 id="actions-2">Actions</h4>
+<p>当服务器接收到来自发布方的 <code>PUBREL</code>
+消息时，服务器使原始消息对感兴趣的订阅者可用，并向发布者发送具有相同
+Message ID 的<code>PUBCOMP</code>
+消息。当订阅者从服务器接收到<code>PUBREL</code>
+消息时，订阅者使该消息对订阅应用程序可用，并向服务器发送
+<code>PUBCOMP</code> 消息。</p>
+<h3 id="pubcomp---确认发布完成">PUBCOMP - 确认发布完成</h3>
+<p>此消息要么是服务器对发布者的 <code>PUBREL</code>
+消息的响应，要么是订阅者对服务器的 <code>PUBREL</code> 消息的响应。它是
+QoS 2 协议流中的第四个也是最后一个消息。</p>
+<h4 id="fixed-header-6">Fixed header</h4>
+<p><img src="/img/mqtt/PUBCOMP_fixed_header_1.PNG" srcset="/img/loading.gif" lazyload /></p>
+<p><img src="/img/mqtt/PUBCOMP_fixed_header_2.PNG" srcset="/img/loading.gif" lazyload /></p>
+<h4 id="variable-header-7">Variable header</h4>
+<p>Variable header 包含与确认的 <code>PUBREL</code> 消息相同的 Message
+ID。</p>
+<p><img src="/img/mqtt/PUBCOMP_variable_header.PNG" srcset="/img/loading.gif" lazyload /></p>
+<h4 id="payload-7">Payload</h4>
+<p>无</p>
+<h4 id="actions-3">Actions</h4>
+<p>当客户端接收到 <code>PUBCOMP</code>
+消息时，它会丢弃原始消息，因为它已经被传递给服务器(仅一次)。</p>
+<h3 id="subscribe---订阅命名主题">SUBSCRIBE - 订阅命名主题</h3>
+<p><code>SUBSCRIBE</code>
+消息允许客户端向服务器注册对一个或多个主题名称。发布到这些主题的消息作为
+<code>PUBLISH</code>
+消息从服务器传递到客户端。订阅消息还指定订阅者希望在其上接收发布消息的
+QoS level。</p>
+<h4 id="fixed-header-7">Fixed header</h4>
+<p><img src="/img/mqtt/SUBSCRIBE_fixed_header.PNG" srcset="/img/loading.gif" lazyload /></p>
+<h4 id="variable-header-8">Variable header</h4>
+<p><img src="/img/mqtt/SUBSCRIBE_variable_header.PNG" srcset="/img/loading.gif" lazyload /></p>
+<h4 id="payload-8">Payload</h4>
+<p><font color='blue'><code>SUBSCRIBE</code>
+消息的有效负载包含客户端希望订阅的主题名称列表，以及客户端希望接收消息的
+QoS级别。</font></p>
+<p>字符串是 UTF-encoded
+编码的，QoS级别占用单个字节的2位。主题字符串可以包含特殊的topic
+通配符来表示一组主题。 这些 topic/QoS 对是连续打包的，如下表中的示例
+payload 所示。</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Topic name</th>
+<th>"a/b"</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Requested QoS</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Topic name</td>
+<td>"c/d"</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Requested QoS</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+<p><code>SUBSCRIBE</code> 消息中的主题名称没有被压缩。示例 payload
+的格式如下表所示。</p>
+<p><img src="/img/mqtt/SUBSCRIBE_payload.PNG" srcset="/img/loading.gif" lazyload /></p>
+<p>假设请求的 QoS 级别被授权，客户端接收到的 <code>PUBLISH</code>
+消息小于或等于这个级别，这取决于来自发布者的原始消息的 QoS 级别。</p>
+<p><font color='pink'>例如，如果客户端对特定主题有 QoS leve 1
+的订阅，那么将以 QoS level 0 向客户端发送到该主题的 QoS level 0
+<code>PUBLISH</code> 消息。发送到同一主题的 QoS level 2
+<code>PUBLISH</code> 消息被降级为 QoS level 1
+以交付给客户端。</font></p>
+<p>这意味着发布者负责确定消息可以传递的最大QoS，但订阅者可以将QoS降级为更适合其使用的QoS。消息的QoS从不升级。</p>
+<p><font color='red'>一个同时设置了两个 QoS
+级别位的请求应该被认为是一个无效的数据包，并且连接被关闭。</font></p>
+<h4 id="response-2">Response</h4>
+<p>当它从客户端接收到一个 <code>SUBSCRIBE</code> 消息时，服务器用一个
+<code>SUBACK</code> 消息响应。</p>
+<p>服务器可以在客户端接收到 <code>SUBACK</code>
+消息之前开始发送由于订阅而产生的 <code>PUBLISH</code> 消息。</p>
+<h3 id="suback---订阅确认">SUBACK - 订阅确认</h3>
+<p>服务器向客户端发送 <code>SUBACK</code> 消息以确认接收到
+<code>SUBSCRIBE</code> 消息。</p>
+<p><code>SUBACK</code> 消息包含授权的 QoS
+级别的列表。<code>SUBACK</code> 消息中授予的 QoS 级别的顺序与相应的
+<code>SUBSCRIBE</code> 消息中的主题名称的顺序匹配。</p>
+<h4 id="fixed-header-8">Fixed header</h4>
+<p><img src="/img/mqtt/SUBACK_fixed_header.PNG" srcset="/img/loading.gif" lazyload /></p>
+<h4 id="variable-header-9">Variable header</h4>
+<p>Variable header 包含被确认的订阅消息的 Message
+ID。下表显示了变量头文件的格式。</p>
+<p><img src="/img/mqtt/PUBCOMP_variable_header.PNG" srcset="/img/loading.gif" lazyload /></p>
+<h4 id="payload-9">Payload</h4>
+<p>Payload 包含一个已授权的 QoS 级别向量。每个级别对应于相应的
+<code>SUBSCRIBE</code> 消息中的主题名称。<code>SUBACK</code> 消息中的
+QoS 级别的顺序与 <code>SUBSCRIBE</code> 消息中主题名称和请求的QoS
+对的顺序匹配。Variable header 中的 Message ID 使能够进行匹配
+<code>SUBACK</code> 消息与相应的 <code>SUBSCRIBE</code> 消息。</p>
+<h3 id="unsubscribe---取消订阅主题">UNSUBSCRIBE - 取消订阅主题</h3>
+<p>客户端向服务器发送 <code>UNSUBSCRIBE</code>
+消息以取消对指定主题的订阅。</p>
+<h4 id="fixed-header-9">Fixed header</h4>
+<p><img src="/img/mqtt/UNSUBSCRIBE_fixed_header.PNG" srcset="/img/loading.gif" lazyload /></p>
+<h4 id="variable-header-10">Variable header</h4>
+<p>Variable header 包含一个 Message ID，因为 <code>UNSUBSCRIBE</code>
+消息的 QoS级别为 1。</p>
+<p><img src="/img/mqtt/UNSUBSCRIBE_variable_header.PNG" srcset="/img/loading.gif" lazyload /></p>
+<h4 id="payload-10">Payload</h4>
+<p>客户端的 payload 中是取消订阅的主题列表。字符串是
+UTF-encoded，并且连续打包。<code>UNSUBSCRIBE</code>
+消息中的主题名称没有被压缩。下表显示了一个示例 payload。</p>
+<table>
+<thead>
+<tr class="header">
+<th>Topic Name</th>
+<th>"a/b"</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Topic Name</td>
+<td>"c/d"</td>
+</tr>
+</tbody>
+</table>
+<p><img src="/img/mqtt/UNSUBSCRIBE_payload.PNG" srcset="/img/loading.gif" lazyload /></p>
+<h4 id="response-3">Response</h4>
+<p>服务器发送 <code>UNSUBACK</code> 到客户端响应
+<code>UNSUBSCRIBE</code> 消息。</p>
+<h3 id="unsuback---取消订阅确认">UNSUBACK - 取消订阅确认</h3>
+<p><code>UNSUBACK</code> 消息由服务器发送给客户端，以确认接收到
+<code>UNSUBSCRIBE</code> 消息。</p>
+<h4 id="fixed-header-10">Fixed header</h4>
+<p><img src="/img/mqtt/UNSUBACK_fixed_header.PNG" srcset="/img/loading.gif" lazyload /></p>
+<h4 id="variable-header-11">Variable header</h4>
+<p><img src="/img/mqtt/PUBCOMP_variable_header.PNG" srcset="/img/loading.gif" lazyload /></p>
+<h4 id="payload-11">Payload</h4>
+<p>无</p>
+<h3 id="pingreq">PINGREQ</h3>
+<p><code>PINGREQ</code>
+消息是从已连接的客户端发送到服务器的“心跳”消息。</p>
+<h4 id="fixed-header-11">Fixed header</h4>
+<p><img src="/img/mqtt/PINGREQ_fixed_header.PNG" srcset="/img/loading.gif" lazyload /></p>
+<h4 id="variable-header-12">Variable header</h4>
+<p>无</p>
+<h4 id="payload-12">Payload</h4>
+<p>无</p>
+<h4 id="response-4">Response</h4>
+<p>对 <code>PINGREQ</code> 消息的响应是 <code>PINGRESP</code> 消息。</p>
+<h3 id="pingresp---ping-响应">PINGRESP - PING 响应</h3>
+<h4 id="fixed-header-12">Fixed header</h4>
+<p><img src="/img/mqtt/PINGRESP_fixed_header_1.PNG" srcset="/img/loading.gif" lazyload /></p>
+<p><img src="/img/mqtt/PINGRESP_fixed_header_2.PNG" srcset="/img/loading.gif" lazyload /></p>
+<h4 id="variable-header-13">Variable header</h4>
+<p>无</p>
+<h4 id="payload-13">Payload</h4>
+<p>无</p>
+<h3 id="disconnect">DISCONNECT</h3>
+<p>客户端向服务器发送 <code>DISCONNECT</code> 消息，表示它即将关闭
+TCP/IP 连接。这允许干净的断开连接，而不是仅仅删除线路。</p>
+<p>如果客户端连接了 clean
+会话标志集，那么之前维护的关于客户端的所有信息将被丢弃。</p>
+<h4 id="fixed-header-13">Fixed header</h4>
+<p><img src="/img/mqtt/DISCONNECT_fixed_header.PNG" srcset="/img/loading.gif" lazyload /></p>
+<h4 id="variable-header-14">Variable header</h4>
+<p>无</p>
+<h4 id="payload-14">Payload</h4>
+<p>无</p>
+<hr />
+<p>QoS level 1：</p>
+<p><img src="/img/mqtt/QoS 1 flow.png" srcset="/img/loading.gif" lazyload style="zoom:25%;" /></p>
+<p>QoS level 2：</p>
+<p><img src="/img/mqtt/QoS 2 flow.png" srcset="/img/loading.gif" lazyload style="zoom:25%;" /></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/IOT/">IOT</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%89%8B%E5%86%8C/">手册</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/05/04/Linux/service/">
+                        <span class="hidden-mobile">Linux 服务</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://blog.xuyinsong.cn" target="_blank" rel="nofollow noopener"><span>Anson</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
