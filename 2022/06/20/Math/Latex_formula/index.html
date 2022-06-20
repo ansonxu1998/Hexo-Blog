@@ -1,0 +1,2806 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/avatar1.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Anson">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Latex 数学公式表">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Latex数学公式">
+<meta property="og:url" content="http://example.com/2022/06/20/Math/Latex_formula/index.html">
+<meta property="og:site_name" content="Anson Blog">
+<meta property="og:description" content="Latex 数学公式表">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-06-20T02:24:00.000Z">
+<meta property="article:modified_time" content="2022-06-20T03:04:37.483Z">
+<meta property="article:author" content="Anson">
+<meta property="article:tag" content="手册">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  <title>Latex数学公式 - Anson Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/arta.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":100,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Anson</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Latex数学公式">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-06-20 10:24" pubdate>
+        2022年6月20日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      12k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      102 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Latex数学公式</h1>
+            
+            <div class="markdown-body">
+              <h2 id="数学公式的插入">数学公式的插入</h2>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">类型</th>
+<th style="text-align: center;">环境名称</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">行内公式</td>
+<td style="text-align: center;"><code>$</code>...<code>$</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">独行公式</td>
+<td style="text-align: center;"><code>$$</code>...<code>$$</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="希腊字母">希腊字母</h2>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">命令</th>
+<th style="text-align: center;">大写</th>
+<th style="text-align: center;">小写</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">alpha</td>
+<td style="text-align: center;"><span
+class="math inline">\(A\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(\alpha\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">gamma</td>
+<td style="text-align: center;"><span
+class="math inline">\(\Gamma\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(\gamma\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">epsilon</td>
+<td style="text-align: center;"><span
+class="math inline">\(E\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(\epsilon\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">eta</td>
+<td style="text-align: center;"><span
+class="math inline">\(H\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(\eta\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">iota</td>
+<td style="text-align: center;"><span
+class="math inline">\(I\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(\iota\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">lambda</td>
+<td style="text-align: center;"><span
+class="math inline">\(\Lambda\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(\lambda\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">nu</td>
+<td style="text-align: center;"><span
+class="math inline">\(N\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(\nu\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">xi</td>
+<td style="text-align: center;"><span
+class="math inline">\(\Xi\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(\xi\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">rho</td>
+<td style="text-align: center;"><span
+class="math inline">\(P\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(\rho\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">tau</td>
+<td style="text-align: center;"><span
+class="math inline">\(T\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(\tau\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">phi</td>
+<td style="text-align: center;"><span
+class="math inline">\(\Phi\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(\phi\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">psi</td>
+<td style="text-align: center;"><span
+class="math inline">\(\Psi\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(\psi\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">beta</td>
+<td style="text-align: center;"><span
+class="math inline">\(B\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(\beta\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">delta</td>
+<td style="text-align: center;"><span
+class="math inline">\(\Delta\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(\delta\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">zeta</td>
+<td style="text-align: center;"><span
+class="math inline">\(Z\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(\zeta\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">theta</td>
+<td style="text-align: center;"><span
+class="math inline">\(\Theta\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(\theta\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">kappa</td>
+<td style="text-align: center;"><span
+class="math inline">\(K\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(\kappa\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">mu</td>
+<td style="text-align: center;"><span
+class="math inline">\(M\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(\mu\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">omicron</td>
+<td style="text-align: center;"><span
+class="math inline">\(O\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(\omicron\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">pi</td>
+<td style="text-align: center;"><span
+class="math inline">\(\Pi\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(pi\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">sigma</td>
+<td style="text-align: center;"><span
+class="math inline">\(\Sigma\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(\sigma\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">upsilon</td>
+<td style="text-align: center;"><span
+class="math inline">\(\Upsilon\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(\upsilon\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">chi</td>
+<td style="text-align: center;"><span
+class="math inline">\(X\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(\chi\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">omega</td>
+<td style="text-align: center;"><span
+class="math inline">\(\Omega\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(\omega\)</span></td>
+</tr>
+</tbody>
+</table>
+<h2 id="声调变音符号">声调/变音符号</h2>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">公式</th>
+<th style="text-align: center;">符号</th>
+<th style="text-align: center;">公式</th>
+<th style="text-align: center;">符号</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><code>\dot&#123;a&#125;</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\dot{a}\)</span></td>
+<td style="text-align: center;"><code>\ddot&#123;a&#125;</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\ddot{a}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\acute&#123;a&#125;</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\acute{a}\)</span></td>
+<td style="text-align: center;"><code>\grave&#123;a&#125;</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\grave{a}\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\check&#123;a&#125;</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\check{a}\)</span></td>
+<td style="text-align: center;"><code>\breve&#123;a&#125;</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\breve{a}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\tilde&#123;a&#125;</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\tilde{a}\)</span></td>
+<td style="text-align: center;"><code>\bar&#123;a&#125;</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\bar{a}\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\hat&#123;a&#125;</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\hat{a}\)</span></td>
+<td style="text-align: center;"><code>\widehat&#123;a&#125;</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\widehat{a}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\vec&#123;a&#125;</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\vec{a}\)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+<h2 id="标准函数">标准函数</h2>
+<table>
+<colgroup>
+<col style="width: 17%" />
+<col style="width: 17%" />
+<col style="width: 29%" />
+<col style="width: 36%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">公式</th>
+<th style="text-align: center;">符号</th>
+<th style="text-align: center;">公式</th>
+<th style="text-align: center;">符号</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><code>\exp_a b=a^b</code></td>
+<td style="text-align: center;"><span class="math inline">\(\exp_a
+b=a^b\)</span></td>
+<td style="text-align: center;"><code>\sin a</code></td>
+<td style="text-align: center;"><span class="math inline">\(\sin
+a\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\exp b=e^b</code></td>
+<td style="text-align: center;"><span class="math inline">\(\exp
+b=e^b\)</span></td>
+<td style="text-align: center;"><code>\cos b</code></td>
+<td style="text-align: center;"><span class="math inline">\(\cos
+b\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>10^m</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(10^m\)</span></td>
+<td style="text-align: center;"><code>\tan c</code></td>
+<td style="text-align: center;"><span class="math inline">\(\tan
+c\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\arcsin a</code></td>
+<td style="text-align: center;"><span class="math inline">\(\arcsin
+a\)</span></td>
+<td style="text-align: center;"><code>\sec d</code></td>
+<td style="text-align: center;"><span class="math inline">\(\sec
+d\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\arccos b</code></td>
+<td style="text-align: center;"><span class="math inline">\(\arccos
+b\)</span></td>
+<td style="text-align: center;"><code>\csc e</code></td>
+<td style="text-align: center;"><span class="math inline">\(\csc
+e\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\arctan c</code></td>
+<td style="text-align: center;"><span class="math inline">\(\arctan
+c\)</span></td>
+<td style="text-align: center;"><code>\cot f</code></td>
+<td style="text-align: center;"><span class="math inline">\(\cot
+f\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\sinh a</code></td>
+<td style="text-align: center;"><span class="math inline">\(\sinh
+a\)</span></td>
+<td style="text-align: center;"><code>\operatorname&#123;argsh&#125; a</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\operatorname{argsh} a\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\cosh b</code></td>
+<td style="text-align: center;"><span class="math inline">\(\cosh
+b\)</span></td>
+<td style="text-align: center;"><code>\operatorname&#123;argch&#125; b</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\operatorname{argch} b\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\tanh c</code></td>
+<td style="text-align: center;"><span class="math inline">\(\tanh
+c\)</span></td>
+<td style="text-align: center;"><code>\operatorname&#123;argth&#125; c</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\operatorname{argth} c\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\coth d</code></td>
+<td style="text-align: center;"><span class="math inline">\(\coth
+d\)</span></td>
+<td style="text-align: center;"><code>\operatorname&#123;&#125;</code></td>
+<td style="text-align: center;">将任何字符转换成标准函数的形式</td>
+</tr>
+</tbody>
+</table>
+<h2 id="界限">界限</h2>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">公式</th>
+<th style="text-align: center;">符号</th>
+<th style="text-align: center;">公式</th>
+<th style="text-align: center;">符号</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><code>\min x</code></td>
+<td style="text-align: center;"><span class="math inline">\(\min
+x\)</span></td>
+<td style="text-align: center;"><code>\lim u</code></td>
+<td style="text-align: center;"><span class="math inline">\(\lim
+u\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\max y</code></td>
+<td style="text-align: center;"><span class="math inline">\(\max
+y\)</span></td>
+<td style="text-align: center;"><code>\liminf v</code></td>
+<td style="text-align: center;"><span class="math inline">\(\liminf
+v\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\inf s</code></td>
+<td style="text-align: center;"><span class="math inline">\(\inf
+s\)</span></td>
+<td style="text-align: center;"><code>\limsup w</code></td>
+<td style="text-align: center;"><span class="math inline">\(\limsup
+w\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\sup t</code></td>
+<td style="text-align: center;"><span class="math inline">\(\sup
+t\)</span></td>
+<td style="text-align: center;"><code>\dim p</code></td>
+<td style="text-align: center;"><span class="math inline">\(\dim
+p\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\deg q</code></td>
+<td style="text-align: center;"><span class="math inline">\(\deg
+q\)</span></td>
+<td style="text-align: center;"><code>\det m</code></td>
+<td style="text-align: center;"><span class="math inline">\(\det
+m\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\ker\phi</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\ker\phi\)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+<h2 id="映射">映射</h2>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">公式</th>
+<th style="text-align: center;">符号</th>
+<th style="text-align: center;">公式</th>
+<th style="text-align: center;">符号</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><code>\Pr j</code></td>
+<td style="text-align: center;"><span class="math inline">\(\Pr
+j\)</span></td>
+<td style="text-align: center;"><code>\hom l</code></td>
+<td style="text-align: center;"><span class="math inline">\(\hom
+l\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\lVert z\rVert</code></td>
+<td style="text-align: center;"><span class="math inline">\(\lVert
+z\rVert\)</span></td>
+<td style="text-align: center;"><code>\arg z</code></td>
+<td style="text-align: center;"><span class="math inline">\(\arg
+z\)</span></td>
+</tr>
+</tbody>
+</table>
+<h2 id="微分和导数">微分和导数</h2>
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 29%" />
+<col style="width: 29%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">公式</th>
+<th style="text-align: center;">符号</th>
+<th style="text-align: center;">公式</th>
+<th style="text-align: center;">符号</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><code>dt</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(dt\)</span></td>
+<td style="text-align: center;"><code>\prime</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\prime\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\mathrm&#123;d&#125;t</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\mathrm{d}t\)</span></td>
+<td style="text-align: center;"><code>\backprime</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\backprime\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\partial t</code></td>
+<td style="text-align: center;"><span class="math inline">\(\partial
+t\)</span></td>
+<td style="text-align: center;"><code>f^\prime</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(f^\prime\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\nabla\psi</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\nabla\psi\)</span></td>
+<td style="text-align: center;"><code>f' f''</code></td>
+<td style="text-align: center;"><span class="math inline">\(f&#39;
+f&#39;&#39;\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>f^&#123;(3)&#125;</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(f^{(3)}\)</span></td>
+<td style="text-align: center;"><code>\dot&#123;y&#125; \ddot&#123;y&#125;</code></td>
+<td style="text-align: center;"><span class="math inline">\(\dot{y}
+\ddot{y}\)</span></td>
+</tr>
+</tbody>
+</table>
+<h2 id="类字母符号和常数">类字母符号和常数</h2>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">公式</th>
+<th style="text-align: center;">符号</th>
+<th style="text-align: center;">公式</th>
+<th style="text-align: center;">符号</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><code>\infty</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\infty\)</span></td>
+<td style="text-align: center;"><code>\aleph</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\aleph\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\complement</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\complement\)</span></td>
+<td style="text-align: center;"><code>\backepsilon</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\backepsilon\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\eth</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\eth\)</span></td>
+<td style="text-align: center;"><code>\Finv</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\Finv\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\hbar</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\hbar\)</span></td>
+<td style="text-align: center;"><code>\Im</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\Im\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\imath</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\imath\)</span></td>
+<td style="text-align: center;"><code>\jmath</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\jmath\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\Bbbk</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\Bbbk\)</span></td>
+<td style="text-align: center;"><code>\ell</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\ell\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\mho</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\mho\)</span></td>
+<td style="text-align: center;"><code>\wp</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\wp\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\Re</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\Re\)</span></td>
+<td style="text-align: center;"><code>\circledS</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\circledS\)</span></td>
+</tr>
+</tbody>
+</table>
+<h2 id="模算数">模算数</h2>
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 22%" />
+<col style="width: 28%" />
+<col style="width: 28%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">公式</th>
+<th style="text-align: center;">符号</th>
+<th style="text-align: center;">公式</th>
+<th style="text-align: center;">符号</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><code>a\equiv1\pmod&#123;m&#125;</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(a\equiv1\pmod{m}\)</span>**</td>
+<td style="text-align: center;"><code>a\bmod b</code></td>
+<td style="text-align: center;"><span class="math inline">\(a\bmod
+b\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\gcd(m,n)</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\gcd(m,n)\)</span></td>
+<td
+style="text-align: center;"><code>\operatorname&#123;lcm&#125;(m,n)</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\operatorname{lcm}(m,n)\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\mid</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\mid\)</span></td>
+<td style="text-align: center;"><code>\nmid</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\nmid\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\shortmid</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\shortmid\)</span></td>
+<td style="text-align: center;"><code>\nshortmid</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\nshortmid\)</span></td>
+</tr>
+</tbody>
+</table>
+<h2 id="根号">根号</h2>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;">公式</th>
+<th style="text-align: center;">符号</th>
+<th style="text-align: center;">公式</th>
+<th style="text-align: center;">符号</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><code>\surd</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\surd\)</span></td>
+<td style="text-align: center;"><code>\sqrt&#123;2&#125;</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\sqrt{2}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\sqrt[n]&#123;&#125;</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\sqrt[n]{}\)</span></td>
+<td style="text-align: center;"><code>\sqrt[n]&#123;x&#125;</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\sqrt[n]{x}\)</span></td>
+</tr>
+</tbody>
+</table>
+<h2 id="运算符">运算符</h2>
+<table>
+<colgroup>
+<col style="width: 23%" />
+<col style="width: 23%" />
+<col style="width: 26%" />
+<col style="width: 26%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">公式</th>
+<th style="text-align: center;">符号</th>
+<th style="text-align: center;">公式</th>
+<th style="text-align: center;">符号</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><code>+</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(+\)</span></td>
+<td style="text-align: center;"><code>-</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(-\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\pm</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\pm\)</span></td>
+<td style="text-align: center;"><code>\mp</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\mp\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\dotplus</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\dotplus\)</span></td>
+<td style="text-align: center;"><code>\times</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\times\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\div</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\div\)</span></td>
+<td style="text-align: center;"><code>\divideontimes</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\divideontimes\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>/</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(/\)</span></td>
+<td style="text-align: center;"><code>\backslash</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\backslash\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\cdot</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\cdot\)</span></td>
+<td style="text-align: center;"><code>*</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(*\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\star</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\star\)</span></td>
+<td style="text-align: center;"><code>\circ</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\circ\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\bullet</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\bullet\)</span></td>
+<td style="text-align: center;"><code>\boxplus</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\boxplus\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\boxminus</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\boxminus\)</span></td>
+<td style="text-align: center;"><code>\boxtimes</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\boxtimes\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\boxdot</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\boxdot\)</span></td>
+<td style="text-align: center;"><code>\oplus</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\oplus\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\ominus</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\ominus\)</span></td>
+<td style="text-align: center;"><code>\otimes</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\otimes\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\oslash</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\oslash\)</span></td>
+<td style="text-align: center;"><code>\odot</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\odot\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\circleddash</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\circleddash\)</span></td>
+<td style="text-align: center;"><code>\circledcirc</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\circledcirc\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\circledast</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\circledast\)</span></td>
+<td style="text-align: center;"><code>\bigoplus</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\bigoplus\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\bigotimes</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\bigotimes\)</span></td>
+<td style="text-align: center;"><code>\bigodot</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\bigodot\)</span></td>
+</tr>
+</tbody>
+</table>
+<h2 id="集合">集合</h2>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">公式</th>
+<th style="text-align: center;">符号</th>
+<th style="text-align: center;">公式</th>
+<th style="text-align: center;">符号</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><code>\&#123; \&#125;</code></td>
+<td style="text-align: center;"><span class="math inline">\(\{
+\}\)</span></td>
+<td style="text-align: center;"><code>\emptyset</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\emptyset\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\varnothing</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\varnothing\)</span></td>
+<td style="text-align: center;"><code>\in</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\in\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\notin</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\notin\)</span></td>
+<td style="text-align: center;"><code>\not\in</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\not\in\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\ni</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\ni\)</span></td>
+<td style="text-align: center;"><code>\not\ni</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\not\ni\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\cap</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\cap\)</span></td>
+<td style="text-align: center;"><code>\Cap</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\Cap\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\sqcap</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\sqcap\)</span></td>
+<td style="text-align: center;"><code>\bigcap</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\bigcap\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\cup</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\cup\)</span></td>
+<td style="text-align: center;"><code>\Cup</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\Cup\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\sqcup</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\sqcup\)</span></td>
+<td style="text-align: center;"><code>\bigcup</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\bigcup\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\bigsqcup</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\bigsqcup\)</span></td>
+<td style="text-align: center;"><code>\uplus</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\uplus\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\biguplus</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\biguplus\)</span></td>
+<td style="text-align: center;"><code>\setminus</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\setminus\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\smallsetminus</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\smallsetminus\)</span></td>
+<td style="text-align: center;"><code>\times</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\times\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\subset</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\subset\)</span></td>
+<td style="text-align: center;"><code>\Subset</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\Subset\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\sqsubset</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\sqsubset\)</span></td>
+<td style="text-align: center;"><code>\supset</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\supset\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\Supset</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\Supset\)</span></td>
+<td style="text-align: center;"><code>\sqsupset</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\sqsupset\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\subseteq</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\subseteq\)</span></td>
+<td style="text-align: center;"><code>\nsubseteq</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\nsubseteq\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\subsetneq</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\subsetneq\)</span></td>
+<td style="text-align: center;"><code>\varsubsetneq</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\varsubsetneq\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\sqsubseteq</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\sqsubseteq\)</span></td>
+<td style="text-align: center;"><code>\supseteq</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\supseteq\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\nsupseteq</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\nsupseteq\)</span></td>
+<td style="text-align: center;"><code>\supsetneq</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\supsetneq\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\varsupsetneq</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\varsupsetneq\)</span></td>
+<td style="text-align: center;"><code>\sqsupseteq</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\sqsupseteq\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\subseteqq</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\subseteqq\)</span></td>
+<td style="text-align: center;"><code>\nsubseteqq</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\nsubseteqq\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\subsetneqq</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\subsetneqq\)</span></td>
+<td style="text-align: center;"><code>\varsubsetneqq</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\varsubsetneqq\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\supseteqq</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\supseteqq\)</span></td>
+<td style="text-align: center;"><code>\nsupseteqq</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\nsupseteqq\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\supsetneqq</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\supsetneqq\)</span></td>
+<td style="text-align: center;"><code>\varsupsetneqq</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\varsupsetneqq\)</span></td>
+</tr>
+</tbody>
+</table>
+<h2 id="关系符号">关系符号</h2>
+<table>
+<colgroup>
+<col style="width: 34%" />
+<col style="width: 34%" />
+<col style="width: 15%" />
+<col style="width: 15%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">公式</th>
+<th style="text-align: center;">符号</th>
+<th style="text-align: center;">公式</th>
+<th style="text-align: center;">符号</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><code>\ne</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\ne\)</span></td>
+<td style="text-align: center;"><code>\neq</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\neq\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\equiv</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\equiv\)</span></td>
+<td style="text-align: center;"><code>\not\equiv</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\not\equiv\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\doteq</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\doteq\)</span></td>
+<td style="text-align: center;"><code>\doteqdot</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\doteqdot\)</span></td>
+</tr>
+<tr class="even">
+<td
+style="text-align: center;"><code>\overset&#123;\underset&#123;def&#125;&#123;&#125;&#125;&#123;=&#125;</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\overset{\underset{def}{}}{=}\)</span></td>
+<td style="text-align: center;"><code>:=</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(:=\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\sim</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\sim\)</span></td>
+<td style="text-align: center;"><code>\nsim</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\nsim\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\backsim</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\backsim\)</span></td>
+<td style="text-align: center;"><code>\thicksim</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\thicksim\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\simeq</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\simeq\)</span></td>
+<td style="text-align: center;"><code>\backsimeq</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\backsimeq\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\eqsim</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\eqsim\)</span></td>
+<td style="text-align: center;"><code>\cong</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\cong\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\ncong</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\ncong\)</span></td>
+<td style="text-align: center;"><code>\approx</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\approx\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\thickapprox</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\thickapprox\)</span></td>
+<td style="text-align: center;"><code>\approxeq</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\approxeq\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\asymp</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\asymp\)</span></td>
+<td style="text-align: center;"><code>\propto</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\propto\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\varpropto</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\varpropto\)</span></td>
+<td style="text-align: center;"><code>&lt;</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(&lt;\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\nless</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\nless\)</span></td>
+<td style="text-align: center;"><code>\ll</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\ll\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\not\ll</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\not\ll\)</span></td>
+<td style="text-align: center;"><code>\lll</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\lll\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\not\lll</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\not\lll\)</span></td>
+<td style="text-align: center;"><code>\lessdot</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\lessdot\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>&gt;</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(&gt;\)</span></td>
+<td style="text-align: center;"><code>\ngtr</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\ngtr\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\gg</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\gg\)</span></td>
+<td style="text-align: center;"><code>\not\gg</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\not\gg\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\ggg</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\ggg\)</span></td>
+<td style="text-align: center;"><code>\not\ggg</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\not\ggg\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\gtrdot</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\gtrdot\)</span></td>
+<td style="text-align: center;"><code>\le</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\le\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\leq</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\leq\)</span></td>
+<td style="text-align: center;"><code>\lneq</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\lneq\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\leqq</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\leqq\)</span></td>
+<td style="text-align: center;"><code>\nleq</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\nleq\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\nleqq</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\nleqq\)</span></td>
+<td style="text-align: center;"><code>\lneqq</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\lneqq\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\lvertneqq</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\lvertneqq\)</span></td>
+<td style="text-align: center;"><code>\ge</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\ge\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\geq</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\geq\)</span></td>
+<td style="text-align: center;"><code>\gneq</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\gneq\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\geqq</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\geqq\)</span></td>
+<td style="text-align: center;"><code>\ngeq</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\ngeq\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\ngeqq</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\ngeqq\)</span></td>
+<td style="text-align: center;"><code>\gneqq</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\gneqq\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\gvertneqq</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\gvertneqq\)</span></td>
+<td style="text-align: center;"><code>\lessgtr</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\lessgtr\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\lesseqgtr</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\lesseqgtr\)</span></td>
+<td style="text-align: center;"><code>\lesseqqgtr</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\lesseqqgtr\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\gtrless</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\gtrless\)</span></td>
+<td style="text-align: center;"><code>\gtreqless</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\gtreqless\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\gtreqqless</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\gtreqqless\)</span></td>
+<td style="text-align: center;"><code>\leqslant</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\leqslant\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\nleqslant</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\nleqslant\)</span></td>
+<td style="text-align: center;"><code>\eqslantless</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\eqslantless\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\geqslant</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\geqslant\)</span></td>
+<td style="text-align: center;"><code>\ngeqslant</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\ngeqslant\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\eqslantgtr</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\eqslantgtr\)</span></td>
+<td style="text-align: center;"><code>\lesssim</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\lesssim\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\lnsim</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\lnsim\)</span></td>
+<td style="text-align: center;"><code>\lessapprox</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\lessapprox\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\lnapprox</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\lnapprox\)</span></td>
+<td style="text-align: center;"><code>\gtrsim</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\gtrsim\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\gnsim</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\gnsim\)</span></td>
+<td style="text-align: center;"><code>\gtrapprox</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\gtrapprox\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\gnapprox</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\gnapprox\)</span></td>
+<td style="text-align: center;"><code>\prec</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\prec\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\nprec</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\nprec\)</span></td>
+<td style="text-align: center;"><code>\preceq</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\preceq\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\npreceq</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\npreceq\)</span></td>
+<td style="text-align: center;"><code>\precneqq</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\precneqq\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\succ</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\succ\)</span></td>
+<td style="text-align: center;"><code>\nsucc</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\nsucc\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\succeq</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\succeq\)</span></td>
+<td style="text-align: center;"><code>\nsucceq</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\nsucceq\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\succneqq</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\succneqq\)</span></td>
+<td style="text-align: center;"><code>\preccurlyeq</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\preccurlyeq\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\curlyeqprec</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\curlyeqprec\)</span></td>
+<td style="text-align: center;"><code>\succcurlyeq</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\succcurlyeq\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\curlyeqsucc</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\curlyeqsucc\)</span></td>
+<td style="text-align: center;"><code>\precsim</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\precsim\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\precnsim</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\precnsim\)</span></td>
+<td style="text-align: center;"><code>\precapprox</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\precapprox\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\precnapprox</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\precnapprox\)</span></td>
+<td style="text-align: center;"><code>\succsim</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\succsim\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\succnsim</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\succnsim\)</span></td>
+<td style="text-align: center;"><code>\succapprox</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\succapprox\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\succnapprox</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\succnapprox\)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+<h2 id="几何符号">几何符号</h2>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 24%" />
+<col style="width: 24%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">公式</th>
+<th style="text-align: center;">符号</th>
+<th style="text-align: center;">公式</th>
+<th style="text-align: center;">符号</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><code>\parallel</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\parallel\)</span></td>
+<td style="text-align: center;"><code>\nparallel</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\nparallel\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\shortparallel</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\shortparallel\)</span></td>
+<td style="text-align: center;"><code>\nshortparallel</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\nshortparallel\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\perp</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\perp\)</span></td>
+<td style="text-align: center;"><code>\angle</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\angle\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\sphericalangle</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\sphericalangle\)</span></td>
+<td style="text-align: center;"><code>\measuredangle</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\measuredangle\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>45^\circ</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(45^\circ\)</span></td>
+<td style="text-align: center;"><code>\Box</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\Box\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\blacksquare</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\blacksquare\)</span></td>
+<td style="text-align: center;"><code>\diamond</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\diamond\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\Diamond</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\Diamond\)</span></td>
+<td style="text-align: center;"><code>\lozenge</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\lozenge\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\blacklozenge</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\blacklozenge\)</span></td>
+<td style="text-align: center;"><code>\bigstar</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\bigstar\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\bigcirc</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\bigcirc\)</span></td>
+<td style="text-align: center;"><code>\triangle</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\triangle\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\bigtriangleup</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\bigtriangleup\)</span></td>
+<td style="text-align: center;"><code>\bigtriangledown</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\bigtriangledown\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\vartriangle</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\vartriangle\)</span></td>
+<td style="text-align: center;"><code>\triangledown</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\triangledown\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\triangleright</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\triangleright\)</span></td>
+<td style="text-align: center;"><code>\blacktriangle</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\blacktriangle\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\blacktriangledown</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\blacktriangledown\)</span></td>
+<td style="text-align: center;"><code>\blacktriangleleft</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\blacktriangleleft\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\blacktriangleright</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\blacktriangleright\)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+<h2 id="逻辑符号">逻辑符号</h2>
+<table>
+<colgroup>
+<col style="width: 23%" />
+<col style="width: 23%" />
+<col style="width: 26%" />
+<col style="width: 26%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">公式</th>
+<th style="text-align: center;">符号</th>
+<th style="text-align: center;">公式</th>
+<th style="text-align: center;">符号</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><code>\forall</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\forall\)</span></td>
+<td style="text-align: center;"><code>\exists</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\exists\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\nexists</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\nexists\)</span></td>
+<td style="text-align: center;"><code>\therefore</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\therefore\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\because</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\because\)</span></td>
+<td style="text-align: center;"><code>\And</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\And\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\lor</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\lor\)</span></td>
+<td style="text-align: center;"><code>\vee</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\vee\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\curlyvee</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\curlyvee\)</span></td>
+<td style="text-align: center;"><code>\bigvee</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\bigvee\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\land</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\land\)</span></td>
+<td style="text-align: center;"><code>\wedge</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\wedge\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\curlywedge</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\curlywedge\)</span></td>
+<td style="text-align: center;"><code>\bigwedge</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\bigwedge\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\bar&#123;q&#125;</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\bar{q}\)</span></td>
+<td style="text-align: center;"><code>\bar&#123;abc&#125;</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\bar{abc}\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\overline&#123;q&#125;</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\overline{q}\)</span></td>
+<td style="text-align: center;"><code>\overline&#123;abc&#125;</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\overline{abc}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\lnot</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\lnot\)</span></td>
+<td style="text-align: center;"><code>\neg</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\neg\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\bot</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\bot\)</span></td>
+<td style="text-align: center;"><code>\top</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\top\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\vdash</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\vdash\)</span></td>
+<td style="text-align: center;"><code>\dashv</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\dashv\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\vDash</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\vDash\)</span></td>
+<td style="text-align: center;"><code>\Vdash</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\Vdash\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\models</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\models\)</span></td>
+<td style="text-align: center;"><code>\Vvdash</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\Vvdash\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\nvdash</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\nvdash\)</span></td>
+<td style="text-align: center;"><code>\nVdash</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\nVdash\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\nvDash</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\nvDash\)</span></td>
+<td style="text-align: center;"><code>\nVDash</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\nVDash\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\ulcorner</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\ulcorner\)</span></td>
+<td style="text-align: center;"><code>\urcorner</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\urcorner\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\llcorner</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\llcorner\)</span></td>
+<td style="text-align: center;"><code>\lrcorner</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\lrcorner\)</span></td>
+</tr>
+</tbody>
+</table>
+<h2 id="箭头">箭头</h2>
+<table>
+<colgroup>
+<col style="width: 24%" />
+<col style="width: 24%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">公式</th>
+<th style="text-align: center;">符号</th>
+<th style="text-align: center;">公式</th>
+<th style="text-align: center;">符号</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><code>\Rrightarrow</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\Rrightarrow\)</span></td>
+<td style="text-align: center;"><code>\Lleftarrow</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\Lleftarrow\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\Rightarrow</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\Rightarrow\)</span></td>
+<td style="text-align: center;"><code>\nRightarrow</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\nRightarrow\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\Longrightarrow</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\Longrightarrow\)</span></td>
+<td style="text-align: center;"><code>\implies</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\implies\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\Leftarrow</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\Leftarrow\)</span></td>
+<td style="text-align: center;"><code>\nLeftarrow</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\nLeftarrow\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\Longleftarrow</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\Longleftarrow\)</span></td>
+<td style="text-align: center;"><code>\Leftrightarrow</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\Leftrightarrow\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\nLeftrightarrow</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\nLeftrightarrow\)</span></td>
+<td style="text-align: center;"><code>\Longleftrightarrow</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\Longleftrightarrow\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\iff</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\iff\)</span></td>
+<td style="text-align: center;"><code>\Uparrow</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\Uparrow\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\Downarrow</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\Downarrow\)</span></td>
+<td style="text-align: center;"><code>\Updownarrow</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\Updownarrow\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\leftarrow</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\leftarrow\)</span></td>
+<td style="text-align: center;"><code>\rightarrow</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\rightarrow\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\nleftarrow</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\nleftarrow\)</span></td>
+<td style="text-align: center;"><code>\nrightarrow</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\nrightarrow\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\leftrightarrow</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\leftrightarrow\)</span></td>
+<td style="text-align: center;"><code>\nleftrightarrow</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\nleftrightarrow\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\longleftarrow</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\longleftarrow\)</span></td>
+<td style="text-align: center;"><code>\longrightarrow</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\longrightarrow\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\longleftrightarrow</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\longleftrightarrow\)</span></td>
+<td style="text-align: center;"><code>\uparrow</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\uparrow\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\downarrow</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\downarrow\)</span></td>
+<td style="text-align: center;"><code>\updownarrow</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\updownarrow\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\nearrow</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\nearrow\)</span></td>
+<td style="text-align: center;"><code>\searrow</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\searrow\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\nwarrow</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\nwarrow\)</span></td>
+<td style="text-align: center;"><code>\swarrow</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\swarrow\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\mapsto</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\mapsto\)</span></td>
+<td style="text-align: center;"><code>\longmapsto</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\longmapsto\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\rightharpoonup</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\rightharpoonup\)</span></td>
+<td style="text-align: center;"><code>\rightharpoondown</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\rightharpoondown\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\leftharpoonup</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\leftharpoonup\)</span></td>
+<td style="text-align: center;"><code>\leftharpoondown</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\leftharpoondown\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\upharpoonleft</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\upharpoonleft\)</span></td>
+<td style="text-align: center;"><code>\upharpoonright</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\upharpoonright\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\downharpoonleft</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\downharpoonleft\)</span></td>
+<td style="text-align: center;"><code>\downharpoonright</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\downharpoonright\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\leftrightharpoons</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\leftrightharpoons\)</span></td>
+<td style="text-align: center;"><code>\rightleftharpoons</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\rightleftharpoons\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\curvearrowleft</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\curvearrowleft\)</span></td>
+<td style="text-align: center;"><code>\circlearrowleft</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\circlearrowleft\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\Lsh</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\Lsh\)</span></td>
+<td style="text-align: center;"><code>\upuparrows</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\upuparrows\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\rightrightarrows</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\rightrightarrows\)</span></td>
+<td style="text-align: center;"><code>\rightleftarrows</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\rightleftarrows\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\rightarrowtail</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\rightarrowtail\)</span></td>
+<td style="text-align: center;"><code>\rightarrowtail</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\rightarrowtail\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\curvearrowright</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\curvearrowright\)</span></td>
+<td style="text-align: center;"><code>\circlearrowright</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\circlearrowright\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\Rsh</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\Rsh\)</span></td>
+<td style="text-align: center;"><code>\downdownarrows</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\downdownarrows\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\leftleftarrows</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\leftleftarrows\)</span></td>
+<td style="text-align: center;"><code>\leftrightarrows</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\leftrightarrows\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\leftarrowtail</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\leftarrowtail\)</span></td>
+<td style="text-align: center;"><code>\looparrowleft</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\looparrowleft\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\hookrightarrow</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\hookrightarrow\)</span></td>
+<td style="text-align: center;"><code>\hookleftarrow</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\hookleftarrow\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\multimap</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\multimap\)</span></td>
+<td style="text-align: center;"><code>\leftrightsquigarrow</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\leftrightsquigarrow\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\rightsquigarrow</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\rightsquigarrow\)</span></td>
+<td style="text-align: center;"><code>\twoheadrightarrow</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\twoheadrightarrow\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\twoheadleftarrow</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\twoheadleftarrow\)</span></td>
+<td style="text-align: center;"><code>\xleftarrow&#123;left&#125;</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\xleftarrow{left}\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\xrightarrow&#123;right&#125;</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\xrightarrow{right}\)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+<h2 id="特殊符号">特殊符号</h2>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">公式</th>
+<th style="text-align: center;">符号</th>
+<th style="text-align: center;">公式</th>
+<th style="text-align: center;">符号</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><code>\amalg</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\amalg\)</span></td>
+<td style="text-align: center;"><code>\%</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\%\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\dagger</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\dagger\)</span></td>
+<td style="text-align: center;"><code>\ddagger</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\ddagger\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\ldots</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\ldots\)</span></td>
+<td style="text-align: center;"><code>\cdots</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\cdots\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\smile</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\smile\)</span></td>
+<td style="text-align: center;"><code>\frown</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\frown\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\wr</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\wr\)</span></td>
+<td style="text-align: center;"><code>\diamondsuit</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\diamondsuit\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\heartsuit</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\heartsuit\)</span></td>
+<td style="text-align: center;"><code>\clubsuit</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\clubsuit\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\spadesuit</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\spadesuit\)</span></td>
+<td style="text-align: center;"><code>\Game</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\Game\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\flat</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\flat\)</span></td>
+<td style="text-align: center;"><code>\natural</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\natural\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\sharp</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\sharp\)</span></td>
+<td style="text-align: center;"><code>\diagup</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\diagup\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\diagdown</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\diagdown\)</span></td>
+<td style="text-align: center;"><code>\centerdot</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\centerdot\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\ltimes</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\ltimes\)</span></td>
+<td style="text-align: center;"><code>\rtimes</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\rtimes\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\leftthreetimes</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\leftthreetimes\)</span></td>
+<td style="text-align: center;"><code>\rightthreetimes</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\rightthreetimes\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\eqcirc</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\eqcirc\)</span></td>
+<td style="text-align: center;"><code>\circeq</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\circeq\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\triangleq</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\triangleq\)</span></td>
+<td style="text-align: center;"><code>\bumpeq</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\bumpeq\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\Bumpeq</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\Bumpeq\)</span></td>
+<td style="text-align: center;"><code>\doteqdot</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\doteqdot\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\risingdotseq</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\risingdotseq\)</span></td>
+<td style="text-align: center;"><code>\fallingdotseq</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\fallingdotseq\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\intercal</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\intercal\)</span></td>
+<td style="text-align: center;"><code>\barwedge</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\barwedge\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\veebar</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\veebar\)</span></td>
+<td style="text-align: center;"><code>\doublebarwedge</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\doublebarwedge\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\between</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\between\)</span></td>
+<td style="text-align: center;"><code>\pitchfork</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\pitchfork\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\vartriangleleft</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\vartriangleleft\)</span></td>
+<td style="text-align: center;"><code>\ntriangleleft</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\ntriangleleft\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\vartriangleright</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\vartriangleright\)</span></td>
+<td style="text-align: center;"><code>\ntriangleright</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\ntriangleright\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\trianglelefteq</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\trianglelefteq\)</span></td>
+<td style="text-align: center;"><code>\ntrianglelefteq</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\ntrianglelefteq\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\trianglerighteq</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\trianglerighteq\)</span></td>
+<td style="text-align: center;"><code>\ntrianglerighteq</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\ntrianglerighteq\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><span class="math display">\[\LaTeX\]</span></p>
+<h2 id="上下标和积分">上下标和积分</h2>
+<table>
+<colgroup>
+<col style="width: 26%" />
+<col style="width: 26%" />
+<col style="width: 23%" />
+<col style="width: 23%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: center;">公式</th>
+<th style="text-align: center;">符号</th>
+<th style="text-align: center;">公式</th>
+<th style="text-align: center;">符号</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><code>a^2</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(a^2\)</span></td>
+<td style="text-align: center;"><code>a_2</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(a_2\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>a^&#123;2+2&#125;</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(a^{2+2}\)</span></td>
+<td style="text-align: center;"><code>a_&#123;i,j&#125;</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(a_{i,j}\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>a^2_2</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(a^2_2\)</span></td>
+<td style="text-align: center;"><code>&#123;&#125;^2_1\!X^3_4</code></td>
+<td style="text-align: center;"><span
+class="math inline">\({}^2_1\!X^3_4\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>x'</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(x&#39;\)</span></td>
+<td style="text-align: center;"><code>x^\prime</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(x^\prime\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\dot&#123;x&#125;</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\dot{x}\)</span></td>
+<td style="text-align: center;"><code>\ddot&#123;x&#125;</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\ddot{x}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\vec&#123;x&#125;</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\vec{x}\)</span></td>
+<td style="text-align: center;"><code>\overleftarrow&#123;AB&#125;</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\overleftarrow{AB}\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\overrightarrow&#123;AB&#125;</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\overrightarrow{AB}\)</span></td>
+<td style="text-align: center;"><code>\widehat&#123;AB&#125;</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\widehat{AB}\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;"><code>\overset&#123;\frown&#125;&#123;AB&#125;</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\overset{\frown}{AB}\)</span></td>
+<td style="text-align: center;"><code>\overline&#123;ABC&#125;</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\overline{ABC}\)</span></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><code>\underline&#123;ABC&#125;</code></td>
+<td style="text-align: center;"><span
+class="math inline">\(\underline{ABC}\)</span></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+<div class="note note-success">
+            <p>上括号</p><p><code>\overbrace{1+2+\cdots+100}</code>：<spanclass="math inline">\(\overbrace{1+2+\cdots+100}\)</span></p><p><code>\begin{matrix}5050\\\overbrace{1+2+\cdots+100}\end{matrix}</code>：<spanclass="math inline">\(\begin{matrix}5050\\\overbrace{1+2+\cdots+100}\end{matrix}\)</span></p><p>下括号</p><p><code>\underbrace{1+2+\cdots+100}</code>：<spanclass="math inline">\(\underbrace{1+2+\cdots+100}\)</span></p><p><code>\begin{matrix}\underbrace{1+2+\cdots+100}\\5050\end{matrix}</code>：<spanclass="math inline">\(\begin{matrix}\underbrace{1+2+\cdots+100}\\5050\end{matrix}\)</span></p>
+          </div>
+<div class="note note-success">
+            <p>求和</p><p><code>\sum_{i=1}^na_i \sum\limits_{i=1}^na_i</code>：<spanclass="math inline">\(\sum_{i=1}^na_i\sum\limits_{i=1}^na_i\)</span></p>
+          </div>
+<div class="note note-success">
+            <p>求积</p><p><code>$\prod_{i=1}^na_i \prod\limits_{i=1}^na_i$</code>：<spanclass="math display">\[\prod_{i=1}^na_i\prod\limits_{i=1}^na_i\]</span></p>
+          </div>
+<div class="note note-success">
+            <p>上积</p><p><code>\coprod_{i=1}^na_i \coprod\limits_{i=1}^na_i</code>：<spanclass="math inline">\(\coprod_{i=1}^na_i\coprod\limits_{i=1}^na_i\)</span></p>
+          </div>
+<div class="note note-success">
+            <p>极限</p><p><code>\lim_{n\to\infty}x_n \lim\limits_{n\to\infty}x_n</code>：<spanclass="math inline">\(\lim_{n\to\infty}x_n\lim\limits_{n\to\infty}x_n\)</span></p>
+          </div>
+<div class="note note-success">
+            <p>积分</p><p><code>\int_{-N}^{N}e^x\,dx</code>：<spanclass="math inline">\(\int_{-N}^{N}e^x\,dx\)</span></p><p>二重积分</p><p><code>\iint_M^Ndx\,dy</code>：<spanclass="math inline">\(\iint_M^Ndx\,dy\)</span></p><p>三重积分</p><p><code>\iiint_M^Ndx\,dy\,dz</code>：<spanclass="math inline">\(\iiint_M^Ndx\,dy\,dz\)</span></p><p>闭合曲线、曲面积分</p><p><code>\oint_Cx^3\,dx+4y^2\,dy</code>：<spanclass="math inline">\(\oint_Cx^3\,dx+4y^2\,dy\)</span></p>
+          </div>
+<div class="note note-success">
+            <p>交集</p><p><code>\bigcap_1^np \bigcap\limits_1^np</code>：<spanclass="math inline">\(\bigcap_1^np \bigcap\limits_1^np\)</span></p><p>并集</p><p><code>\bigcup_1^np \bigcup\limits_1^np</code>：<spanclass="math inline">\(\bigcup_1^np \bigcup\limits_1^np\)</span></p>
+          </div>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%95%B0%E5%AD%A6/">数学</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%89%8B%E5%86%8C/">手册</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/06/18/IOT/Mqtt/">
+                        <span class="hidden-mobile">MQTT V3.1</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://blog.xuyinsong.cn" target="_blank" rel="nofollow noopener"><span>Anson</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          load: ['ui/lazy']
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
