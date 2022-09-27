@@ -16,23 +16,23 @@
   <meta name="author" content="Anson">
   <meta name="keywords" content="">
   
-    <meta name="description" content="从立创 EDA 中导出 AD　封装">
+    <meta name="description" content="关于 Python 的深拷贝和浅拷贝">
 <meta property="og:type" content="article">
-<meta property="og:title" content="立创 EAD 导出 AD 封装">
-<meta property="og:url" content="http://example.com/2022/09/08/Altium-Designer/%E7%AB%8B%E5%88%9BEAD%E5%AF%BC%E5%87%BAAD%E5%B0%81%E8%A3%85/index.html">
+<meta property="og:title" content="Python 的深拷贝和浅拷贝">
+<meta property="og:url" content="http://example.com/2022/09/27/Pyhon/%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/index.html">
 <meta property="og:site_name" content="Anson Blog">
-<meta property="og:description" content="从立创 EDA 中导出 AD　封装">
+<meta property="og:description" content="关于 Python 的深拷贝和浅拷贝">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/img/EDA2AD/AD%20logo.jpg">
-<meta property="article:published_time" content="2022-09-08T08:43:00.000Z">
-<meta property="article:modified_time" content="2022-09-08T08:48:04.563Z">
+<meta property="og:image" content="http://example.com/img/python/logo.png">
+<meta property="article:published_time" content="2022-09-27T11:01:00.000Z">
+<meta property="article:modified_time" content="2022-09-27T11:39:49.340Z">
 <meta property="article:author" content="Anson">
-<meta property="article:tag" content="Note">
+<meta property="article:tag" content="Python tips">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/img/EDA2AD/AD%20logo.jpg">
+<meta name="twitter:image" content="http://example.com/img/python/logo.png">
   
   
-  <title>立创 EAD 导出 AD 封装 - Anson Blog</title>
+  <title>Python 的深拷贝和浅拷贝 - Anson Blog</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -178,7 +178,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="立创 EAD 导出 AD 封装">
+            <span class="h2" id="subtitle" title="Python 的深拷贝和浅拷贝">
               
             </span>
 
@@ -188,8 +188,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-09-08 16:43" pubdate>
-        2022年9月8日 下午
+      <time datetime="2022-09-27 19:01" pubdate>
+        2022年9月27日 晚上
       </time>
     </span>
   
@@ -199,7 +199,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      125 字
+      337 字
     </span>
   
 
@@ -208,7 +208,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      2 分钟
+      3 分钟
     </span>
   
 
@@ -237,61 +237,30 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">立创 EAD 导出 AD 封装</h1>
+            <h1 style="display: none">Python 的深拷贝和浅拷贝</h1>
             
             <div class="markdown-body">
-              <h1 id="立创-eda-导出-ad-封装">立创 EDA 导出 AD 封装</h1>
-<ol type="1">
-<li>导出 AD 库</li>
-</ol>
-<p><img src="/img/EDA2AD/1.png" srcset="/img/loading.gif" lazyload /></p>
-<ol start="2" type="1">
-<li>确认导出</li>
-</ol>
-<p><img src="/img/EDA2AD/2.png" srcset="/img/loading.gif" lazyload /></p>
-<ol start="3" type="1">
-<li>得到 AD 的 pcb 文件</li>
-</ol>
-<p><img src="/img/EDA2AD/3.png" srcset="/img/loading.gif" lazyload /></p>
+              <h1 id="python-的深拷贝和浅拷贝">Python 的深拷贝和浅拷贝</h1>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">a = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, [<span class="hljs-number">4</span>, <span class="hljs-number">5</span>]]]<br>b = a<br></code></pre></div></td></tr></table></figure>
+<p>当使用赋值运算符 <code>=</code>，a 和 b
+两个变量指向的同一个地址：</p>
+<p><img src="/img/python/2022-9-27-1.png" srcset="/img/loading.gif" lazyload /></p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">a = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, [<span class="hljs-number">4</span>, <span class="hljs-number">5</span>]]]<br>c = a.cope()<br></code></pre></div></td></tr></table></figure>
+<p>当列表具有多层时，<code>copy()</code>
+仅拷贝一层(<strong>浅拷贝</strong>)，而深层的列表依然指向原列表的地址：</p>
+<p><img src="/img/python/2022-09-27-2.png" srcset="/img/loading.gif" lazyload /></p>
+<p>修改第一层列表的值并不会影响原有列表，但是修改深层列表的原有列表：</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python">c[<span class="hljs-number">3</span>][<span class="hljs-number">0</span>] = <span class="hljs-number">10</span><br></code></pre></div></td></tr></table></figure>
+<p><img src="/img/python/2022-09-27-3.png" srcset="/img/loading.gif" lazyload /></p>
+<p>若要完全拷贝(<strong>深拷贝</strong>)多层列表 a，则需要使用
+<code>copy</code> 库中的 <code>deepcopy()</code> 函数实现：</p>
+<figure class="highlight python"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs python"><span class="hljs-keyword">import</span> copy<br>d = copy.deepcopy(a)<br></code></pre></div></td></tr></table></figure>
+<p><img src="/img/python/2022-09-27-4.png" srcset="/img/loading.gif" lazyload /></p>
+<p>此时，对于 列表 d 的修改不会对原有列表 a 产生任何影响。</p>
 <blockquote>
-<p>生成的是 pcb 文件，需要再 AD 中生成元件封装库</p>
+<p>Python
+中的拷贝仅对于可变量如列表、字典等，而不可变的量如常量、元组等，则没有拷贝的属性。</p>
 </blockquote>
-<ol start="4" type="1">
-<li>生成元件封装库</li>
-</ol>
-<p><img src="/img/EDA2AD/4.png" srcset="/img/loading.gif" lazyload /></p>
-<ol start="5" type="1">
-<li>得到元件封装库</li>
-</ol>
-<p><img src="/img/EDA2AD/5.png" srcset="/img/loading.gif" lazyload /></p>
-<h1 id="导出-3d-模型文件">导出 3D 模型文件</h1>
-<ol type="1">
-<li>导出 3D 模型</li>
-</ol>
-<p><img src="/img/EDA2AD/6.png" srcset="/img/loading.gif" lazyload /></p>
-<ol start="2" type="1">
-<li>选择导出</li>
-</ol>
-<p><img src="/img/EDA2AD/7.png" srcset="/img/loading.gif" lazyload /></p>
-<ol start="3" type="1">
-<li>使用 <code>FreeCAD</code> 打开文件，并删除 PCB 底板</li>
-</ol>
-<p><img src="/img/EDA2AD/8.png" srcset="/img/loading.gif" lazyload /></p>
-<ol start="4" type="1">
-<li>导出 STEP 文件</li>
-</ol>
-<p><img src="/img/EDA2AD/9.png" srcset="/img/loading.gif" lazyload /></p>
-<center>
-选中模型
-</center>
-<p><img src="/img/EDA2AD/10.png" srcset="/img/loading.gif" lazyload /></p>
-<center>
-选择导出
-</center>
-<p><img src="/img/EDA2AD/11.png" srcset="/img/loading.gif" lazyload /></p>
-<center>
-保存
-</center>
 
             </div>
             <hr>
@@ -301,7 +270,7 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/Altium-Designer/">Altium Designer</a>
+                      <a class="hover-with-bg" href="/categories/Python/">Python</a>
                     
                   </div>
                 
@@ -309,7 +278,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/Note/">Note</a>
+                      <a class="hover-with-bg" href="/tags/Python-tips/">Python tips</a>
                     
                   </div>
                 
@@ -326,18 +295,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/09/19/Altium-Designer/AD20%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">AD20 使用笔记</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/06/30/Linux/Docker%E5%AE%9E%E6%88%98%E6%A1%88%E4%BE%8B/">
-                        <span class="hidden-mobile">Docker实战案例</span>
+                      <a href="/2022/09/19/Altium-Designer/AD20%E4%BD%BF%E7%94%A8%E7%AC%94%E8%AE%B0/">
+                        <span class="hidden-mobile">AD20 使用笔记</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
