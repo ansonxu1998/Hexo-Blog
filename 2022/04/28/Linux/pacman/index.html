@@ -243,7 +243,7 @@
               <h1 id="pacman---arch-linux-软件管理器">pacman - Arch Linux
 软件管理器</h1>
 <h3 id="synopsis">SYNOPSIS</h3>
-<figure class="highlight shell"><table><tr><td class="gutter"><div class="code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><pre><code class="hljs shell">pacman &lt;operation&gt; [options] [targets]<br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">pacman &lt;operation&gt; [options] [targets]<br></code></pre></div></td></tr></table></figure>
 <h3 id="description">DESCRIPTION</h3>
 <p>Pacman 是一个包管理的使用程序，用于跟踪 Linux
 系统上以安装的包。它具有依赖性支持、软件包组、安装和卸载脚本，以及将本地机器与远程存储库同步以自动升级包的功能。Pacman
@@ -372,7 +372,7 @@ pacman 下载软件包时，它会把它们保存在一个缓存目录中。<cod
 </ul>
 <hr />
 <h3 id="examples">EXAMPLES</h3>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs shell">pacman -Ss ne.hack<br><span class="hljs-meta prompt_"># </span><span class="language-bash">搜索仓库中符合正则表达式<span class="hljs-string">&quot;ne.hack&quot;</span>的包</span><br>pacman -S gpm<br><span class="hljs-meta prompt_"># </span><span class="language-bash">下载并安装gpm，包括依赖项。</span><br>pacman -U /home/user/ceofhack-0.6-1-x86_64.pkg.tar.gz<br><span class="hljs-meta prompt_"># </span><span class="language-bash">从本地文件安装<span class="hljs-string">&quot;ceofhack-0.6-1&quot;</span>软件包。</span><br>pacman -Syu<br><span class="hljs-meta prompt_"># </span><span class="language-bash">更新包列表并升级所有包。</span><br>pacman -Syu gpm<br><span class="hljs-meta prompt_"># </span><span class="language-bash">更新包列表，升级所有的包，然后安装gpm(如果还没有安装的话)。</span><br></code></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">pacman -Ss ne.hack<br><span class="hljs-meta prompt_"># </span><span class="language-bash">搜索仓库中符合正则表达式<span class="hljs-string">&quot;ne.hack&quot;</span>的包</span><br>pacman -S gpm<br><span class="hljs-meta prompt_"># </span><span class="language-bash">下载并安装gpm，包括依赖项。</span><br>pacman -U /home/user/ceofhack-0.6-1-x86_64.pkg.tar.gz<br><span class="hljs-meta prompt_"># </span><span class="language-bash">从本地文件安装<span class="hljs-string">&quot;ceofhack-0.6-1&quot;</span>软件包。</span><br>pacman -Syu<br><span class="hljs-meta prompt_"># </span><span class="language-bash">更新包列表并升级所有包。</span><br>pacman -Syu gpm<br><span class="hljs-meta prompt_"># </span><span class="language-bash">更新包列表，升级所有的包，然后安装gpm(如果还没有安装的话)。</span><br></code></pre></div></td></tr></table></figure>
 <hr />
 <p>官方帮助文档：<a
 target="_blank" rel="noopener" href="https://man.archlinux.org/man/pacman.8">pacman</a></p>
