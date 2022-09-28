@@ -1,0 +1,722 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/avatar1.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Anson">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Amesim 与 Simulink 联合仿真的相关配置。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Amesim 与 Simulink 的联合仿真">
+<meta property="og:url" content="http://example.com/2022/09/28/Amesim/Amesim%E4%B8%8ESimulink%E8%81%94%E5%90%88%E4%BB%BF%E7%9C%9F/index.html">
+<meta property="og:site_name" content="Anson Blog">
+<meta property="og:description" content="Amesim 与 Simulink 联合仿真的相关配置。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/Amesim/AMESim.png">
+<meta property="article:published_time" content="2022-09-28T07:12:00.000Z">
+<meta property="article:modified_time" content="2022-09-28T11:12:47.340Z">
+<meta property="article:author" content="Anson">
+<meta property="article:tag" content="Amesim Simulink">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/img/Amesim/AMESim.png">
+  
+  
+  <title>Amesim 与 Simulink 的联合仿真 - Anson Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/arta.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":100,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Anson</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/bg/bg1.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Amesim 与 Simulink 的联合仿真">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-09-28 15:12" pubdate>
+        2022年9月28日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.5k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      30 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Amesim 与 Simulink 的联合仿真</h1>
+            
+            <div class="markdown-body">
+              <h1 id="amesim-与-simulink-的联合仿真">Amesim 与 Simulink
+的联合仿真</h1>
+<h2 id="环境配置">环境配置</h2>
+<p>软件版本为：<code>Matlab 2020b</code> 和
+<code>Amesim 2021.1</code>，编译器使用 MinGW-w64</p>
+<h3 id="附件安装">附件安装：</h3>
+<p>首先需要在 Matlab 中安装附件
+<code>MATLAB Support for MinGW-w64 C/C++ Compiler</code></p>
+<p><img src="/img/Amesim/2022-09-28-1.png" srcset="/img/loading.gif" lazyload /></p>
+<p><img src="/img/Amesim/2022-09-28-2.png" srcset="/img/loading.gif" lazyload /></p>
+<p>点击进入安装即可。</p>
+<p>安装完成后，在命令行输入：</p>
+<ul>
+<li><code>mex -setup</code></li>
+<li><code>mex -setup C++</code></li>
+</ul>
+<p><img src="/img/Amesim/2022-09-28-3.png" srcset="/img/loading.gif" lazyload /></p>
+<h3 id="环境变量配置关键">环境变量配置（关键）</h3>
+<p><em>路径：</em> 此电脑 - 属性 - 高级系统设置 - 高级 - 环境变量 -
+系统变量</p>
+<table>
+<colgroup>
+<col style="width: 18%" />
+<col style="width: 81%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>变量名</th>
+<th>变量值</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>AME</td>
+<td><code>D:\tool\Simcenter\2021.1\Amesim</code></td>
+</tr>
+<tr class="even">
+<td>GCC_HOME</td>
+<td><code>D:\Program Files\Polyspace\R2020b\extern\lib\win64\mingw64</code></td>
+</tr>
+<tr class="odd">
+<td>MATLAB</td>
+<td><code>D:\Program Files\Polyspace\R2020b</code></td>
+</tr>
+<tr class="even">
+<td>MW_MINGW64_LOC</td>
+<td><code>C:\ProgramData\MATLAB\SupportPackages\R2020b\3P.instrset\mingw_w64.instrset</code></td>
+</tr>
+</tbody>
+</table>
+<p><code>Path</code>：</p>
+<p><img src="/img/Amesim/2022-09-28-4.png" srcset="/img/loading.gif" lazyload /></p>
+<p><img src="/img/Amesim/2022-09-28-5.png" srcset="/img/loading.gif" lazyload /></p>
+<h3 id="amesim-编译器选择">Amesim 编译器选择</h3>
+<p><em>路径</em>： Tools - Preference - Compliation - Active
+complier</p>
+<p><img src="/img/Amesim/2022-09-28-6.png" srcset="/img/loading.gif" lazyload /></p>
+<h2 id="联合仿真接口使用">联合仿真接口使用</h2>
+<p><em>路径</em>：Interfaces - Create interface block...</p>
+<p><img src="/img/Amesim/2022-09-28-7.png" srcset="/img/loading.gif" lazyload /></p>
+<p><img src="/img/Amesim/2022-09-28-8.png" srcset="/img/loading.gif" lazyload /></p>
+<p>完成 Amesim 草图之后，编译模型，编译细节如下：</p>
+<p><img src="/img/Amesim/2022-09-28-9.png" srcset="/img/loading.gif" lazyload /></p>
+<p>点击 <code>Run simulation</code>：</p>
+<p><img src="/img/Amesim/2022-09-28-10.png" srcset="/img/loading.gif" lazyload /></p>
+<p>再点击 <code>Simulink</code>，系统将会自动打开 Matlab 并启动
+Simulink。</p>
+<p>在 Simulink Libaray 的 User-Defined Functions 中找到
+<code>S-Function</code> 模块：</p>
+<p><img src="/img/Amesim/2022-09-28-11.png" srcset="/img/loading.gif" lazyload /></p>
+<p><code>S-Function</code> 模块的参数设置：</p>
+<p><img src="/img/Amesim/2022-09-28-12.png" srcset="/img/loading.gif" lazyload /></p>
+<h2 id="simulink-interface">Simulink interface</h2>
+<h3 id="两个接口">两个接口</h3>
+<p>Simcenter Amesim-Simulink 和 Simulink-Simcenter Amesim 接口可以结合
+Simcenter Amesim 和 Simulink 模型执行仿真。
+由于涉及两个软件包，接口提供了两个主要选项：将 Simcenter Amesim 模型导入
+Simulink，或将 Simulink 模型导入 Simcenter Amesim。</p>
+<p>通过 Simcenter Amesim-Simulink 界面，用户可以选择这两种方法。
+除了这两种方法之外，还可以将 Simcenter Amesim 求解器（带有 Simcenter
+Amesim 模型）导出到 Simulink。
+这有时称为协同仿真，因为我们使用两个软件包中的求解器，它们一起执行仿真。</p>
+<h3 id="如何选择我需要的接口">如何选择我需要的接口？</h3>
+<p>这个问题没有单一的答案。答案取决于很多事情。有些 Simcenter Amesim
+系统很难或不可能使用 Simulink
+求解器求解。如果是这种情况，那么用户需要选择协同仿真。这意味着将同时使用
+Simcenter Amesim 和 Simulink 求解器，并且每个人都将负责自己的部分。</p>
+<p>有时 Simulink 系统非常复杂，将其导入 Simcenter Amesim
+可能不是最佳解决方案，因为它会强制使用 Simulink
+固定步长求解器，这有时并不合适。</p>
+<p>除了技术原因之外，还必须考虑模型的用途。如果主要目的是测试/开发
+Simcenter Amesim 模型，则将 Simulink 模型导入 Simcenter Amesim
+可能是最佳策略。如果主要目的是使用在 Simcenter Amesim 中编写的物理模型在
+Simulink 中测试/开发控制器，那么在 Simulink
+中工作显然是一个更好的主意。</p>
+<p>在许多情况下，一个人开发 Simulink 模型，另一个人开发 Simcenter Amesim
+模型。负责整合模型的人显然更喜欢在“他的”环境中工作。</p>
+<p>有一些明显的“规则”：如果 Simulink 模型很小，而 Simcenter Amesim
+模型很大，则可以将 Simulink 模型放入 Simcenter Amesim。如果需要访问
+Simcenter Amesim 中的独特功能，您还可以将 Simulink 模型放入 Simcenter
+Amesim。如果您需要使用 MATLAB® /Simulink 中的特殊功能，您可以将
+Simcenter Amesim 模型放入 Simulink。</p>
+<h3 id="supported-simulink-interface-modes">Supported Simulink Interface
+modes</h3>
+<table>
+<colgroup>
+<col style="width: 66%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Envisaged interface mode</th>
+<th>Supported</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1.1 Co-simulation in <strong>Simcenter Amesim: Simcenter</strong>
+Amesim as Master (<strong>Simulink</strong> as Slave)</td>
+<td><span class="math inline">\(Yes^{1.2.}\)</span>
+(<strong>SL2AMECosim</strong>)</td>
+</tr>
+<tr class="even">
+<td>2.1 Co-simulation in <strong>Simulink: Simcenter Amesim</strong> as
+Slave (<strong>Simulink</strong> as Master)</td>
+<td><span class="math inline">\(Yes^{3.}\)</span>
+(<strong>AME2SLCosim</strong>)</td>
+</tr>
+<tr class="odd">
+<td>2.2 Model Exchange: Export of <strong>Simcenter Amesim</strong>
+model into <strong>Simulink</strong></td>
+<td><span class="math inline">\(Yes^{3.4.}\)</span> (AME2SL)</td>
+</tr>
+</tbody>
+</table>
+<ol type="1">
+<li>对于 <strong>SL2AMECosim</strong>，请注意，一旦将
+<strong>Simulink</strong> 模型导入 <strong>Simcenter
+Amesim</strong>，就不再需要 <strong>Simulink</strong>
+来运行仿真（也不需要 <strong>Simulink</strong> 许可证）。</li>
+<li>在 <strong>SL2AMECosim</strong> 中，嵌入式 <strong>Simulink</strong>
+求解器始终为固定步长类型。 支持 <strong>Simulink</strong>
+模型引用。</li>
+<li>对于 <strong>Simulink</strong>（<strong>AME2SL</strong> 或
+<strong>AME2SLCosim</strong>）中的模型交换或联合仿真，<strong>Simcenter
+Amesim</strong> 模型（带或不带求解器）导出为
+<code>S-Function</code></li>
+<li>此模式符合黑盒选项。</li>
+</ol>
+<p><img src="/img/Amesim/2022-09-28-13.png" srcset="/img/loading.gif" lazyload /></p>
+<p><img src="/img/Amesim/2022-09-28-14.png" srcset="/img/loading.gif" lazyload /></p>
+<p><img src="/img/Amesim/2022-09-28-15.png" srcset="/img/loading.gif" lazyload /></p>
+<h3 id="multiple-simulink-interfaces">multiple Simulink interfaces</h3>
+<ul>
+<li>如果 Simcenter Amesim 是目标环境，则接口模块是完全独立的（Simcenter
+Amesim 将其视为标准子模型）。 因此，在同一个 Simcenter Amesim
+草图上混合不同块类型或设置的可能性在理论上是不受限制的。</li>
+<li>可以在单个 Simcenter Amesim 系统中使用多个 Simulink
+模型（反之亦然），但不能在单个 Simcenter Amesim 系统中多次使用同一个
+Simulink 模型（反之亦然）。</li>
+<li>目标环境中使用的块与独立系统一样多。</li>
+</ul>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Capability</th>
+<th>Supported interface modes for blocks</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Use <span class="math inline">\(N\)</span> <strong>Simulink</strong>
+blocks in <strong>Simcenter Amesim</strong></td>
+<td>Co-simulation (<strong>SL2AMECosim</strong>): <strong>Simcenter
+Amesim as Master</strong> (<strong>Simulink</strong> as Slave)</td>
+</tr>
+<tr class="even">
+<td>Use <span class="math inline">\(N\)</span> <strong>Simulink</strong>
+blocks with different solver types (variable/fixed-step) or solver
+settings in <strong>Simcenter Amesim</strong></td>
+<td>Co-simulation (<strong>SL2AMECosim</strong>): <strong>Simcenter
+Amesim</strong> as Master (<strong>Simulink</strong> as Slave)<span
+class="math inline">\(^2\)</span></td>
+</tr>
+<tr class="odd">
+<td>Use <span class="math inline">\(N\)</span> <strong>Simcenter
+Amesim</strong> blocks in <strong>Simulink</strong></td>
+<td>Co-simulation (<strong>AME2SLCosim</strong>): <strong>Simcenter
+Amesim</strong> as Slave (<strong>Simulink</strong> as Master)</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>Model Exchange (<strong>AME2SL</strong>): Export of
+<strong>Simcenter Amesim</strong> model into
+<strong>Simulink</strong></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>Both Co-simulation (<strong>AME2SLCosim</strong>): <strong>Simcenter
+Amesim</strong> as Slave (<strong>Simulink</strong> as Master) and Model
+Exchange (<strong>AME2SL</strong>): Export of <strong>Simcenter
+Amesim</strong> model into <strong>Simulink</strong></td>
+</tr>
+<tr class="even">
+<td>Use <span class="math inline">\(N\)</span> <strong>Simcenter
+Amesim</strong> blocks with different solver types (variable/fixed-step)
+or solver settings in <strong>Simulink</strong></td>
+<td>Co-simulation (<strong>AME2SLCosim</strong>): <strong>Simcenter
+Amesim</strong> as Slave (<strong>Simulink</strong> as Master)</td>
+</tr>
+</tbody>
+</table>
+<ol type="1">
+<li>在 <strong>SL2AMECosim</strong>
+中，求解器类型始终为固定步长，但设置（例如步长）可以不同</li>
+<li>其中一些模型交换块可以是黑盒类型。</li>
+</ol>
+<h2 id="依赖">依赖</h2>
+<p>编译器：</p>
+<p><img src="/img/Amesim/2022-09-28-16.png" srcset="/img/loading.gif" lazyload /></p>
+<p>The <strong>Simcenter Amesim</strong> to <strong>Simulink</strong>
+interface for <strong>Simcenter Amesim</strong> 2021.1 has been
+extensively tested using <strong>MATLAB/Simulink</strong> R2015b and
+R2020b. All releases between these two versions should work.</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Amesim/">Amesim</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Amesim-Simulink/">Amesim Simulink</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/09/27/Pyhon/%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/">
+                        <span class="hidden-mobile">Python 的深拷贝和浅拷贝</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://blog.xuyinsong.cn" target="_blank" rel="nofollow noopener"><span>Anson</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          load: ['ui/lazy']
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
