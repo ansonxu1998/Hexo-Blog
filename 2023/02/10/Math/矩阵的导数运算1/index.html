@@ -16,24 +16,21 @@
   <meta name="author" content="Anson">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Amesim 与 Simulink 联合仿真的相关配置。">
+    <meta name="description" content="矩阵求导">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Amesim 与 Simulink 的联合仿真">
-<meta property="og:url" content="http://example.com/2022/09/28/Amesim/Amesim%E4%B8%8ESimulink%E8%81%94%E5%90%88%E4%BB%BF%E7%9C%9F/index.html">
+<meta property="og:title" content="矩阵的导数运算(1)">
+<meta property="og:url" content="http://example.com/2023/02/10/Math/%E7%9F%A9%E9%98%B5%E7%9A%84%E5%AF%BC%E6%95%B0%E8%BF%90%E7%AE%971/index.html">
 <meta property="og:site_name" content="Anson Blog">
-<meta property="og:description" content="Amesim 与 Simulink 联合仿真的相关配置。">
+<meta property="og:description" content="矩阵求导">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/img/Amesim/AMESim.png">
-<meta property="article:published_time" content="2022-09-28T07:12:00.000Z">
-<meta property="article:modified_time" content="2023-02-10T09:13:34.660Z">
+<meta property="article:published_time" content="2023-02-10T08:37:00.000Z">
+<meta property="article:modified_time" content="2023-02-10T09:35:12.353Z">
 <meta property="article:author" content="Anson">
-<meta property="article:tag" content="Amesim">
-<meta property="article:tag" content="Simulink">
+<meta property="article:tag" content="矩阵求导">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/img/Amesim/AMESim.png">
   
   
-  <title>Amesim 与 Simulink 的联合仿真 - Anson Blog</title>
+  <title>矩阵的导数运算(1) - Anson Blog</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -179,7 +176,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Amesim 与 Simulink 的联合仿真">
+            <span class="h2" id="subtitle" title="矩阵的导数运算(1)">
               
             </span>
 
@@ -189,8 +186,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-09-28 15:12" pubdate>
-        2022年9月28日 下午
+      <time datetime="2023-02-10 16:37" pubdate>
+        2023年2月10日 下午
       </time>
     </span>
   
@@ -200,7 +197,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      3.5k 字
+      2.5k 字
     </span>
   
 
@@ -209,7 +206,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      30 分钟
+      22 分钟
     </span>
   
 
@@ -238,237 +235,89 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Amesim 与 Simulink 的联合仿真</h1>
+            <h1 style="display: none">矩阵的导数运算(1)</h1>
             
             <div class="markdown-body">
-              <h1 id="amesim-与-simulink-的联合仿真">Amesim 与 Simulink
-的联合仿真</h1>
-<h2 id="环境配置">环境配置</h2>
-<p>软件版本为：<code>Matlab 2020b</code> 和
-<code>Amesim 2021.1</code>，编译器使用 MinGW-w64</p>
-<h3 id="附件安装">附件安装：</h3>
-<p>首先需要在 Matlab 中安装附件
-<code>MATLAB Support for MinGW-w64 C/C++ Compiler</code></p>
-<p><img src="/img/Amesim/2022-09-28-1.png" srcset="/img/loading.gif" lazyload /></p>
-<p><img src="/img/Amesim/2022-09-28-2.png" srcset="/img/loading.gif" lazyload /></p>
-<p>点击进入安装即可。</p>
-<p>安装完成后，在命令行输入：</p>
+              <h1 id="矩阵的导数运算-1">矩阵的导数运算 (1)</h1>
+<h2 id="标量方程对向量的导数">标量方程对向量的导数：</h2>
+<p>定义： <span class="math display">\[
+\frac{\partial f(\vec{y})}{\partial
+\vec{y}}=\begin{bmatrix}\frac{\partial f(\vec{y})}{\partial
+y_1}\\\frac{\partial f(\vec{y})}{\partial y_2}\\\vdots\\\frac{\partial
+f(\vec{y})}{\partial y_m}\end{bmatrix}_{m\times 1}
+\]</span></p>
 <ul>
-<li><code>mex -setup</code></li>
-<li><code>mex -setup C++</code></li>
+<li><span class="math inline">\(f(\vec{y})\)</span> - 标量 [<span
+class="math inline">\(1\times1\)</span>]</li>
+<li><span
+class="math inline">\(\vec{y}=\begin{bmatrix}y_1\\y_2\vdots\\y_m\end{bmatrix}_{m\times1}\)</span>
+- 向量 [<span class="math inline">\(m\times1\)</span>]</li>
 </ul>
-<p><img src="/img/Amesim/2022-09-28-3.png" srcset="/img/loading.gif" lazyload /></p>
-<h3 id="环境变量配置关键">环境变量配置（关键）</h3>
-<p><em>路径：</em> 此电脑 - 属性 - 高级系统设置 - 高级 - 环境变量 -
-系统变量</p>
-<table>
-<colgroup>
-<col style="width: 18%" />
-<col style="width: 81%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>变量名</th>
-<th>变量值</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>AME</td>
-<td><code>D:\tool\Simcenter\2021.1\Amesim</code></td>
-</tr>
-<tr class="even">
-<td>GCC_HOME</td>
-<td><code>D:\Program Files\Polyspace\R2020b\extern\lib\win64\mingw64</code></td>
-</tr>
-<tr class="odd">
-<td>MATLAB</td>
-<td><code>D:\Program Files\Polyspace\R2020b</code></td>
-</tr>
-<tr class="even">
-<td>MW_MINGW64_LOC</td>
-<td><code>C:\ProgramData\MATLAB\SupportPackages\R2020b\3P.instrset\mingw_w64.instrset</code></td>
-</tr>
-</tbody>
-</table>
-<p><code>Path</code>：</p>
-<p><img src="/img/Amesim/2022-09-28-4.png" srcset="/img/loading.gif" lazyload /></p>
-<p><img src="/img/Amesim/2022-09-28-5.png" srcset="/img/loading.gif" lazyload /></p>
-<h3 id="amesim-编译器选择">Amesim 编译器选择</h3>
-<p><em>路径</em>： Tools - Preference - Compliation - Active
-complier</p>
-<p><img src="/img/Amesim/2022-09-28-6.png" srcset="/img/loading.gif" lazyload /></p>
-<h2 id="联合仿真接口使用">联合仿真接口使用</h2>
-<p><em>路径</em>：Interfaces - Create interface block...</p>
-<p><img src="/img/Amesim/2022-09-28-7.png" srcset="/img/loading.gif" lazyload /></p>
-<p><img src="/img/Amesim/2022-09-28-8.png" srcset="/img/loading.gif" lazyload /></p>
-<p>完成 Amesim 草图之后，编译模型，编译细节如下：</p>
-<p><img src="/img/Amesim/2022-09-28-9.png" srcset="/img/loading.gif" lazyload /></p>
-<p>点击 <code>Run simulation</code>：</p>
-<p><img src="/img/Amesim/2022-09-28-10.png" srcset="/img/loading.gif" lazyload /></p>
-<p>再点击 <code>Simulink</code>，系统将会自动打开 Matlab 并启动
-Simulink。</p>
-<p>在 Simulink Libaray 的 User-Defined Functions 中找到
-<code>S-Function</code> 模块：</p>
-<p><img src="/img/Amesim/2022-09-28-11.png" srcset="/img/loading.gif" lazyload /></p>
-<p><code>S-Function</code> 模块的参数设置：</p>
-<p><img src="/img/Amesim/2022-09-28-12.png" srcset="/img/loading.gif" lazyload /></p>
-<h2 id="simulink-interface">Simulink interface</h2>
-<h3 id="两个接口">两个接口</h3>
-<p>Simcenter Amesim-Simulink 和 Simulink-Simcenter Amesim 接口可以结合
-Simcenter Amesim 和 Simulink 模型执行仿真。
-由于涉及两个软件包，接口提供了两个主要选项：将 Simcenter Amesim 模型导入
-Simulink，或将 Simulink 模型导入 Simcenter Amesim。</p>
-<p>通过 Simcenter Amesim-Simulink 界面，用户可以选择这两种方法。
-除了这两种方法之外，还可以将 Simcenter Amesim 求解器（带有 Simcenter
-Amesim 模型）导出到 Simulink。
-这有时称为协同仿真，因为我们使用两个软件包中的求解器，它们一起执行仿真。</p>
-<h3 id="如何选择我需要的接口">如何选择我需要的接口？</h3>
-<p>这个问题没有单一的答案。答案取决于很多事情。有些 Simcenter Amesim
-系统很难或不可能使用 Simulink
-求解器求解。如果是这种情况，那么用户需要选择协同仿真。这意味着将同时使用
-Simcenter Amesim 和 Simulink 求解器，并且每个人都将负责自己的部分。</p>
-<p>有时 Simulink 系统非常复杂，将其导入 Simcenter Amesim
-可能不是最佳解决方案，因为它会强制使用 Simulink
-固定步长求解器，这有时并不合适。</p>
-<p>除了技术原因之外，还必须考虑模型的用途。如果主要目的是测试/开发
-Simcenter Amesim 模型，则将 Simulink 模型导入 Simcenter Amesim
-可能是最佳策略。如果主要目的是使用在 Simcenter Amesim 中编写的物理模型在
-Simulink 中测试/开发控制器，那么在 Simulink
-中工作显然是一个更好的主意。</p>
-<p>在许多情况下，一个人开发 Simulink 模型，另一个人开发 Simcenter Amesim
-模型。负责整合模型的人显然更喜欢在“他的”环境中工作。</p>
-<p>有一些明显的“规则”：如果 Simulink 模型很小，而 Simcenter Amesim
-模型很大，则可以将 Simulink 模型放入 Simcenter Amesim。如果需要访问
-Simcenter Amesim 中的独特功能，您还可以将 Simulink 模型放入 Simcenter
-Amesim。如果您需要使用 MATLAB® /Simulink 中的特殊功能，您可以将
-Simcenter Amesim 模型放入 Simulink。</p>
-<h3 id="supported-simulink-interface-modes">Supported Simulink Interface
-modes</h3>
-<table>
-<colgroup>
-<col style="width: 66%" />
-<col style="width: 33%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Envisaged interface mode</th>
-<th>Supported</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>1.1 Co-simulation in <strong>Simcenter Amesim: Simcenter</strong>
-Amesim as Master (<strong>Simulink</strong> as Slave)</td>
-<td><span class="math inline">\(Yes^{1.2.}\)</span>
-(<strong>SL2AMECosim</strong>)</td>
-</tr>
-<tr class="even">
-<td>2.1 Co-simulation in <strong>Simulink: Simcenter Amesim</strong> as
-Slave (<strong>Simulink</strong> as Master)</td>
-<td><span class="math inline">\(Yes^{3.}\)</span>
-(<strong>AME2SLCosim</strong>)</td>
-</tr>
-<tr class="odd">
-<td>2.2 Model Exchange: Export of <strong>Simcenter Amesim</strong>
-model into <strong>Simulink</strong></td>
-<td><span class="math inline">\(Yes^{3.4.}\)</span> (AME2SL)</td>
-</tr>
-</tbody>
-</table>
-<ol type="1">
-<li>对于 <strong>SL2AMECosim</strong>，请注意，一旦将
-<strong>Simulink</strong> 模型导入 <strong>Simcenter
-Amesim</strong>，就不再需要 <strong>Simulink</strong>
-来运行仿真（也不需要 <strong>Simulink</strong> 许可证）。</li>
-<li>在 <strong>SL2AMECosim</strong> 中，嵌入式 <strong>Simulink</strong>
-求解器始终为固定步长类型。 支持 <strong>Simulink</strong>
-模型引用。</li>
-<li>对于 <strong>Simulink</strong>（<strong>AME2SL</strong> 或
-<strong>AME2SLCosim</strong>）中的模型交换或联合仿真，<strong>Simcenter
-Amesim</strong> 模型（带或不带求解器）导出为
-<code>S-Function</code></li>
-<li>此模式符合黑盒选项。</li>
-</ol>
-<p><img src="/img/Amesim/2022-09-28-13.png" srcset="/img/loading.gif" lazyload /></p>
-<p><img src="/img/Amesim/2022-09-28-14.png" srcset="/img/loading.gif" lazyload /></p>
-<p><img src="/img/Amesim/2022-09-28-15.png" srcset="/img/loading.gif" lazyload /></p>
-<h3 id="multiple-simulink-interfaces">multiple Simulink interfaces</h3>
-<ul>
-<li>如果 Simcenter Amesim 是目标环境，则接口模块是完全独立的（Simcenter
-Amesim 将其视为标准子模型）。 因此，在同一个 Simcenter Amesim
-草图上混合不同块类型或设置的可能性在理论上是不受限制的。</li>
-<li>可以在单个 Simcenter Amesim 系统中使用多个 Simulink
-模型（反之亦然），但不能在单个 Simcenter Amesim 系统中多次使用同一个
-Simulink 模型（反之亦然）。</li>
-<li>目标环境中使用的块与独立系统一样多。</li>
-</ul>
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Capability</th>
-<th>Supported interface modes for blocks</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Use <span class="math inline">\(N\)</span> <strong>Simulink</strong>
-blocks in <strong>Simcenter Amesim</strong></td>
-<td>Co-simulation (<strong>SL2AMECosim</strong>): <strong>Simcenter
-Amesim as Master</strong> (<strong>Simulink</strong> as Slave)</td>
-</tr>
-<tr class="even">
-<td>Use <span class="math inline">\(N\)</span> <strong>Simulink</strong>
-blocks with different solver types (variable/fixed-step) or solver
-settings in <strong>Simcenter Amesim</strong></td>
-<td>Co-simulation (<strong>SL2AMECosim</strong>): <strong>Simcenter
-Amesim</strong> as Master (<strong>Simulink</strong> as Slave)<span
-class="math inline">\(^2\)</span></td>
-</tr>
-<tr class="odd">
-<td>Use <span class="math inline">\(N\)</span> <strong>Simcenter
-Amesim</strong> blocks in <strong>Simulink</strong></td>
-<td>Co-simulation (<strong>AME2SLCosim</strong>): <strong>Simcenter
-Amesim</strong> as Slave (<strong>Simulink</strong> as Master)</td>
-</tr>
-<tr class="even">
-<td></td>
-<td>Model Exchange (<strong>AME2SL</strong>): Export of
-<strong>Simcenter Amesim</strong> model into
-<strong>Simulink</strong></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td>Both Co-simulation (<strong>AME2SLCosim</strong>): <strong>Simcenter
-Amesim</strong> as Slave (<strong>Simulink</strong> as Master) and Model
-Exchange (<strong>AME2SL</strong>): Export of <strong>Simcenter
-Amesim</strong> model into <strong>Simulink</strong></td>
-</tr>
-<tr class="even">
-<td>Use <span class="math inline">\(N\)</span> <strong>Simcenter
-Amesim</strong> blocks with different solver types (variable/fixed-step)
-or solver settings in <strong>Simulink</strong></td>
-<td>Co-simulation (<strong>AME2SLCosim</strong>): <strong>Simcenter
-Amesim</strong> as Slave (<strong>Simulink</strong> as Master)</td>
-</tr>
-</tbody>
-</table>
-<ol type="1">
-<li>在 <strong>SL2AMECosim</strong>
-中，求解器类型始终为固定步长，但设置（例如步长）可以不同</li>
-<li>其中一些模型交换块可以是黑盒类型。</li>
-</ol>
-<h2 id="依赖">依赖</h2>
-<p>编译器：</p>
-<p><img src="/img/Amesim/2022-09-28-16.png" srcset="/img/loading.gif" lazyload /></p>
-<p>The <strong>Simcenter Amesim</strong> to <strong>Simulink</strong>
-interface for <strong>Simcenter Amesim</strong> 2021.1 has been
-extensively tested using <strong>MATLAB/Simulink</strong> R2015b and
-R2020b. All releases between these two versions should work.</p>
+<blockquote>
+<p>求导结果的行数与分母相同，称为<strong>分母布局</strong>(Denominator
+Layout)</p>
+</blockquote>
+<p><span class="math display">\[
+\frac{\partial
+f{\vec{y}}}{\partial\vec{y}}=\begin{bmatrix}\frac{\partial
+f(\vec{y})}{\partial y_1}&amp;\frac{\partial f(\vec{y})}{\partial
+y_2}&amp;\dots&amp;\frac{\partial f(\vec{y})}{\partial
+y_m}\end{bmatrix}_{1\times m}
+\]</span></p>
+<blockquote>
+<p>行数和分子相同，称为<strong>分子布局</strong>(Numerator Layout)</p>
+</blockquote>
+<p><strong>例</strong></p>
+<blockquote>
+<p><span class="math inline">\(f(y_1, y_2) = y_1^2+y_2^2\)</span>，<span
+class="math inline">\(\vec{y}=\begin{bmatrix}y_1\\y_2\end{bmatrix}\)</span></p>
+<p><span class="math display">\[\frac{\partial f(\vec{y})}{\partial
+\vec{y}}=\begin{bmatrix}\frac{\partial f(\vec{y})}{\partial
+y_1}\\\frac{\partial f(\vec{y})}{\partial
+y_2}\end{bmatrix}=\begin{bmatrix}2y_1\\2y_2\end{bmatrix}\]</span>
+分母布局</p>
+<p><span class="math display">\[\frac{\partial f(\vec{y})}{\partial
+\vec{y}}=\begin{bmatrix}\frac{\partial f(\vec{y})}{\partial
+y_1}&amp;\frac{\partial f(\vec{y})}{\partial
+y_2}\end{bmatrix}=\begin{bmatrix}2y_1&amp;2y_2\end{bmatrix}\]</span>
+分子布局</p>
+</blockquote>
+<h2 id="向量方程对向量的导数">向量方程对向量的导数</h2>
+<p><span
+class="math display">\[\vec{f}(\vec{y})=\begin{bmatrix}f_1(\vec{y})\\f_2(\vec{y})\\\vdots\\f_n(\vec{y})\end{bmatrix}_{n\times1}\]</span>
+<span
+class="math display">\[\vec{y}=\begin{bmatrix}y_1\\y_2\\\vdots\\y_m\end{bmatrix}_{m\times1}\]</span>
+<span class="math display">\[
+\frac{\partial\vec{f}(\vec{y})_{n\times1}}{\partial\vec{y}_{m\times1}}=\begin{bmatrix}\frac{\partial
+f(\vec{y})}{\partial y_1}\\\frac{\partial f(\vec{y})}{\partial
+y_2}\\\vdots\\\frac{\partial f(\vec{y})}{\partial
+y_m}\end{bmatrix}=\begin{bmatrix}\frac{\partial f_1(\vec{y})}{\partial
+y_1}&amp;\frac{\partial f_2(\vec{y})}{\partial
+y_1}&amp;\dots&amp;\frac{\partial f_n(\vec{y})}{\partial y_1} \\
+\vdots&amp;\ddots&amp;&amp;\vdots\\
+\frac{\partial f_1(\vec{y})}{\partial y_m}&amp;\frac{\partial
+f_2(\vec{y})}{\partial y_m}&amp;\dots&amp;\frac{\partial
+f_n(\vec{y})}{\partial y_m}\end{bmatrix}
+\]</span> 分母布局</p>
+<h3 id="常用特例">常用特例</h3>
+<p>若 <span
+class="math inline">\(\vec{y}=\begin{bmatrix}y_1\\\vdots\\y_m\end{bmatrix}_{m\times1}\)</span>,
+<span
+class="math inline">\(A=\begin{bmatrix}a_{11}&amp;\cdots&amp;a_{1m}\\\vdots&amp;\ddots&amp;\vdots\\a_{m1}&amp;\cdots&amp;a_{mm}\end{bmatrix}_{m\times
+m}\)</span>, 则 <span class="math inline">\(\frac{\partial
+A\vec{y}}{\partial\vec{y}}=A^T\)</span></p>
+<hr />
+<p>若 <span
+class="math inline">\(\vec{y}=\begin{bmatrix}y_1\\\vdots\\y_m\end{bmatrix}_{m\times1}\)</span>,
+<span
+class="math inline">\(A=\begin{bmatrix}a_{11}&amp;\cdots&amp;a_{1m}\\\vdots&amp;\ddots&amp;\vdots\\a_{m1}&amp;\cdots&amp;a_{mm}\end{bmatrix}_{m\times
+m}\)</span> , 则 <span
+class="math inline">\(\frac{\partial\vec{y}^TA\vec{y}}{\partial\vec{y}}=A\vec{y}+A^T\vec{y}\)</span>.
+当 A 为对称矩阵时，<span class="math inline">\(A^T=A\)</span>, <span
+class="math inline">\(\frac{\partial\vec{y}^TA\vec{y}}{\partial\vec{y}}=2A\vec{y}\)</span></p>
+<blockquote>
+<p><span class="math inline">\(\vec{y}^TA\vec{y}\)</span> : 二次型</p>
+</blockquote>
 
             </div>
             <hr>
@@ -478,7 +327,7 @@ R2020b. All releases between these two versions should work.</p>
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/Amesim/">Amesim</a>
+                      <a class="hover-with-bg" href="/categories/%E6%95%B0%E5%AD%A6/">数学</a>
                     
                   </div>
                 
@@ -486,9 +335,7 @@ R2020b. All releases between these two versions should work.</p>
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/Amesim/">Amesim</a>
-                    
-                      <a class="hover-with-bg" href="/tags/Simulink/">Simulink</a>
+                      <a class="hover-with-bg" href="/tags/%E7%9F%A9%E9%98%B5%E6%B1%82%E5%AF%BC/">矩阵求导</a>
                     
                   </div>
                 
@@ -505,18 +352,12 @@ R2020b. All releases between these two versions should work.</p>
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/02/10/Math/%E7%9F%A9%E9%98%B5%E7%9A%84%E5%AF%BC%E6%95%B0%E8%BF%90%E7%AE%971/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">矩阵的导数运算(1)</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/09/27/Pyhon/%E6%B7%B1%E6%8B%B7%E8%B4%9D%E4%B8%8E%E6%B5%85%E6%8B%B7%E8%B4%9D/">
-                        <span class="hidden-mobile">Python 的深拷贝和浅拷贝</span>
+                      <a href="/2022/09/28/Amesim/Amesim%E4%B8%8ESimulink%E8%81%94%E5%90%88%E4%BB%BF%E7%9C%9F/">
+                        <span class="hidden-mobile">Amesim 与 Simulink 的联合仿真</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

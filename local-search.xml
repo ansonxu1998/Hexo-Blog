@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>矩阵的导数运算(1)</title>
+    <link href="/2023/02/10/Math/%E7%9F%A9%E9%98%B5%E7%9A%84%E5%AF%BC%E6%95%B0%E8%BF%90%E7%AE%971/"/>
+    <url>/2023/02/10/Math/%E7%9F%A9%E9%98%B5%E7%9A%84%E5%AF%BC%E6%95%B0%E8%BF%90%E7%AE%971/</url>
+    
+    <content type="html"><![CDATA[<h1 id="矩阵的导数运算-1">矩阵的导数运算 (1)</h1><h2 id="标量方程对向量的导数">标量方程对向量的导数：</h2><p>定义： <span class="math display">\[\frac{\partial f(\vec{y})}{\partial\vec{y}}=\begin{bmatrix}\frac{\partial f(\vec{y})}{\partialy_1}\\\frac{\partial f(\vec{y})}{\partial y_2}\\\vdots\\\frac{\partialf(\vec{y})}{\partial y_m}\end{bmatrix}_{m\times 1}\]</span></p><ul><li><span class="math inline">\(f(\vec{y})\)</span> - 标量 [<spanclass="math inline">\(1\times1\)</span>]</li><li><spanclass="math inline">\(\vec{y}=\begin{bmatrix}y_1\\y_2\vdots\\y_m\end{bmatrix}_{m\times1}\)</span>- 向量 [<span class="math inline">\(m\times1\)</span>]</li></ul><blockquote><p>求导结果的行数与分母相同，称为<strong>分母布局</strong>(DenominatorLayout)</p></blockquote><p><span class="math display">\[\frac{\partialf{\vec{y}}}{\partial\vec{y}}=\begin{bmatrix}\frac{\partialf(\vec{y})}{\partial y_1}&amp;\frac{\partial f(\vec{y})}{\partialy_2}&amp;\dots&amp;\frac{\partial f(\vec{y})}{\partialy_m}\end{bmatrix}_{1\times m}\]</span></p><blockquote><p>行数和分子相同，称为<strong>分子布局</strong>(Numerator Layout)</p></blockquote><p><strong>例</strong></p><blockquote><p><span class="math inline">\(f(y_1, y_2) = y_1^2+y_2^2\)</span>，<spanclass="math inline">\(\vec{y}=\begin{bmatrix}y_1\\y_2\end{bmatrix}\)</span></p><p><span class="math display">\[\frac{\partial f(\vec{y})}{\partial\vec{y}}=\begin{bmatrix}\frac{\partial f(\vec{y})}{\partialy_1}\\\frac{\partial f(\vec{y})}{\partialy_2}\end{bmatrix}=\begin{bmatrix}2y_1\\2y_2\end{bmatrix}\]</span>分母布局</p><p><span class="math display">\[\frac{\partial f(\vec{y})}{\partial\vec{y}}=\begin{bmatrix}\frac{\partial f(\vec{y})}{\partialy_1}&amp;\frac{\partial f(\vec{y})}{\partialy_2}\end{bmatrix}=\begin{bmatrix}2y_1&amp;2y_2\end{bmatrix}\]</span>分子布局</p></blockquote><h2 id="向量方程对向量的导数">向量方程对向量的导数</h2><p><spanclass="math display">\[\vec{f}(\vec{y})=\begin{bmatrix}f_1(\vec{y})\\f_2(\vec{y})\\\vdots\\f_n(\vec{y})\end{bmatrix}_{n\times1}\]</span><spanclass="math display">\[\vec{y}=\begin{bmatrix}y_1\\y_2\\\vdots\\y_m\end{bmatrix}_{m\times1}\]</span><span class="math display">\[\frac{\partial\vec{f}(\vec{y})_{n\times1}}{\partial\vec{y}_{m\times1}}=\begin{bmatrix}\frac{\partialf(\vec{y})}{\partial y_1}\\\frac{\partial f(\vec{y})}{\partialy_2}\\\vdots\\\frac{\partial f(\vec{y})}{\partialy_m}\end{bmatrix}=\begin{bmatrix}\frac{\partial f_1(\vec{y})}{\partialy_1}&amp;\frac{\partial f_2(\vec{y})}{\partialy_1}&amp;\dots&amp;\frac{\partial f_n(\vec{y})}{\partial y_1} \\\vdots&amp;\ddots&amp;&amp;\vdots\\\frac{\partial f_1(\vec{y})}{\partial y_m}&amp;\frac{\partialf_2(\vec{y})}{\partial y_m}&amp;\dots&amp;\frac{\partialf_n(\vec{y})}{\partial y_m}\end{bmatrix}\]</span> 分母布局</p><h3 id="常用特例">常用特例</h3><p>若 <spanclass="math inline">\(\vec{y}=\begin{bmatrix}y_1\\\vdots\\y_m\end{bmatrix}_{m\times1}\)</span>,<spanclass="math inline">\(A=\begin{bmatrix}a_{11}&amp;\cdots&amp;a_{1m}\\\vdots&amp;\ddots&amp;\vdots\\a_{m1}&amp;\cdots&amp;a_{mm}\end{bmatrix}_{m\timesm}\)</span>, 则 <span class="math inline">\(\frac{\partialA\vec{y}}{\partial\vec{y}}=A^T\)</span></p><hr /><p>若 <spanclass="math inline">\(\vec{y}=\begin{bmatrix}y_1\\\vdots\\y_m\end{bmatrix}_{m\times1}\)</span>,<spanclass="math inline">\(A=\begin{bmatrix}a_{11}&amp;\cdots&amp;a_{1m}\\\vdots&amp;\ddots&amp;\vdots\\a_{m1}&amp;\cdots&amp;a_{mm}\end{bmatrix}_{m\timesm}\)</span> , 则 <spanclass="math inline">\(\frac{\partial\vec{y}^TA\vec{y}}{\partial\vec{y}}=A\vec{y}+A^T\vec{y}\)</span>.当 A 为对称矩阵时，<span class="math inline">\(A^T=A\)</span>, <spanclass="math inline">\(\frac{\partial\vec{y}^TA\vec{y}}{\partial\vec{y}}=2A\vec{y}\)</span></p><blockquote><p><span class="math inline">\(\vec{y}^TA\vec{y}\)</span> : 二次型</p></blockquote>]]></content>
+    
+    
+    <categories>
+      
+      <category>数学</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>矩阵求导</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Amesim 与 Simulink 的联合仿真</title>
     <link href="/2022/09/28/Amesim/Amesim%E4%B8%8ESimulink%E8%81%94%E5%90%88%E4%BB%BF%E7%9C%9F/"/>
     <url>/2022/09/28/Amesim/Amesim%E4%B8%8ESimulink%E8%81%94%E5%90%88%E4%BB%BF%E7%9C%9F/</url>
@@ -20,7 +45,9 @@
     
     <tags>
       
-      <tag>Amesim Simulink</tag>
+      <tag>Amesim</tag>
+      
+      <tag>Simulink</tag>
       
     </tags>
     
