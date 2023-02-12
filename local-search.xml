@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>脉冲宽度调制 PWM</title>
+    <link href="/2023/02/12/Control/%E8%84%89%E5%86%B2%E5%AE%BD%E5%BA%A6%E8%B0%83%E5%88%B6%20PWM/"/>
+    <url>/2023/02/12/Control/%E8%84%89%E5%86%B2%E5%AE%BD%E5%BA%A6%E8%B0%83%E5%88%B6%20PWM/</url>
+    
+    <content type="html"><![CDATA[<h1 id="脉冲宽度调制-pwm">脉冲宽度调制 PWM</h1><blockquote><p><strong>脉宽调制(PWM)</strong>或<strong>脉冲持续时间调制(PDM)</strong>是一种通过有效地将电信号分成离散部分来降低电信号传输的平均功率的方法。馈送到负载的电压（和电流）的平均值通过快速打开和关闭电源与负载之间的开关来控制。同关断周期相比，开关开启的时间越长，提供给负载的总功率就越高。PWM特别适用于运行惯性负载，例如电机看，这些负载不容易受到这种离散开关的影响，因为它们的惯性导致它们反应缓慢。PWM开关频率必须足够高，以不影响负载，也就是说，负载感知到的合成波形必须尽可能平滑。</p></blockquote><h2 id="占空比-duty-cycle">占空比 Duty cycle</h2><p>占空比是指“开启”时间与固定间隔时间（周期）的比例；低占空比对应于低功率，因为电源大部分时间都是关闭的。占空比以百分比表示，100%表示完全开启。当数字信号在一半时间打开，另一半时间关闭时，数字信号的占空比为50%，类似于“方波”。</p><p><img src="/img/Control/duty%20cycle.png" /></p><center>占空比 Duty cycle</center><h2 id="原理-principle">原理 Principle</h2><p>脉宽调制使用矩形脉冲波，调制其脉冲宽度，导致波形平均值发生变化。如果我们考虑一个脉冲波形<spanclass="math inline">\(f(t)\)</span>，其周期为 <spanclass="math inline">\(T\)</span>、最小值为 <spanclass="math inline">\(y_{min}\)</span>、最大值为 <spanclass="math inline">\(y_{max}\)</span> 以及占空比 <spanclass="math inline">\(D\)</span>，则其波形的平均值为： <spanclass="math display">\[\bar{y}=\frac{1}{T}\int^T_0f(t)dt\]</span> 因为 <span class="math inline">\(f(t)\)</span> 是脉冲波，当<span class="math inline">\(0&lt;t&lt;D\cdot T\)</span> 时，其值为 <spanclass="math inline">\(y_{max}\)</span>；当 <spanclass="math inline">\(D\cdot T&lt;t&lt;T\)</span> 时，其值为 <spanclass="math inline">\(y_{min}\)</span>，上式可写为： <spanclass="math display">\[\begin{align}\bar{y}&amp;=\frac{1}{T}\left(\int^{DT}_0y_{max}dt+\int^T_{DT}y_{min}dt\right)\\&amp;=\frac{1}{T}(D\cdot T\cdot y_{max}+T(1-D)y_{min})\\&amp;=D\cdot y_{max}+(1-D)y_{min}\end{align}\]</span> 其中，<span class="math inline">\(y_{min}=0\)</span>，<spanclass="math inline">\(\bar{y}=D\cdoty_{max}\)</span>。因此，信号的平均值直接取决于占空比 <spanclass="math inline">\(D\)</span>。</p><p>生成 PWM信号的最简单方法时<strong>交叉方法</strong>，它只需要一个锯齿波或三角波和一个比较器。当参考信号（红色正弦波）的值大于调制波形（蓝色）时，PWM信号（洋红色）处于高电平状态，否则处于电平状态。</p><p><img src="/img/Control/SPWM.png" style="zoom:50%;" /></p><center>SPWM</center><h2 id="simulink-生成-spwm波">Simulink 生成 SPWM波</h2><ol type="1"><li>正弦波</li></ol><p>它是基频(逆变器输出电压所需的频率)上的参考信号。</p><ol start="2" type="1"><li>锯齿波</li></ol><p>它是高频载波。</p><ol start="3" type="1"><li>参考波与载波相比较</li><li>当 参考波 &gt; 载波，输出为高；当 参考波 &lt; 载波，输出为低。</li></ol><p><img src="/img/Control/Simulink SPWM.png" style="zoom:50%;" /></p><p>三个正弦波信号发生器，频率均为 <spanclass="math inline">\(2\pi*50\)</span>，相位相差120°。一个锯齿波信号发生器，其频率为 1000 Hz，相位是 180°。</p><p><img src="/img/Control/Simulink SPWM wave.png" style="zoom:40%;" /></p><p>正弦波与锯齿波信号比较，生成 SPWM 信号：</p><p><img src="/img/Control/Simulink SPWM wave2.png" style="zoom:40%;" /></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>自动控制</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>PWM</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>矩阵的导数运算(1)</title>
     <link href="/2023/02/10/Math/%E7%9F%A9%E9%98%B5%E7%9A%84%E5%AF%BC%E6%95%B0%E8%BF%90%E7%AE%971/"/>
     <url>/2023/02/10/Math/%E7%9F%A9%E9%98%B5%E7%9A%84%E5%AF%BC%E6%95%B0%E8%BF%90%E7%AE%971/</url>
