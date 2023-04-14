@@ -1,0 +1,1231 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/avatar1.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Anson">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="Controller Area Network (CAN bus)是一种车辆总线标准，允许为控制器和设备在没有主机的情况下与彼此的应用程序进行通信（没有主从关系）。它是一种基于消息的协议，最初设计用于汽车内的多路复用电线以节省铜线，但它也可以许多其他情况。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CAN 总线协议">
+<meta property="og:url" content="http://example.com/2023/04/01/Communication%20Protocol/CAN%20%E6%80%BB%E7%BA%BF/index.html">
+<meta property="og:site_name" content="Anson Blog">
+<meta property="og:description" content="Controller Area Network (CAN bus)是一种车辆总线标准，允许为控制器和设备在没有主机的情况下与彼此的应用程序进行通信（没有主从关系）。它是一种基于消息的协议，最初设计用于汽车内的多路复用电线以节省铜线，但它也可以许多其他情况。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img/CAN/CAN.jpg">
+<meta property="article:published_time" content="2023-04-01T09:02:00.000Z">
+<meta property="article:modified_time" content="2023-04-14T12:31:54.140Z">
+<meta property="article:author" content="Anson">
+<meta property="article:tag" content="CAN 总线">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/img/CAN/CAN.jpg">
+  
+  
+  <title>CAN 总线协议 - Anson Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/arta.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":100,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Anson</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/bg/bg2.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="CAN 总线协议">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2023-04-01 17:02" pubdate>
+        2023年4月1日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      11k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      94 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">CAN 总线协议</h1>
+            
+            <div class="markdown-body">
+              <h1 id="can-总线协议">CAN 总线协议</h1>
+<p><strong>Controller Area Network (CAN bus)</strong>
+是一种车辆总线标准，允许为控制器和设备在没有主机的情况下与彼此的应用程序进行通信（没有主从关系）。它是一种基于消息的协议，最初设计用于汽车内的多路复用电线以节省铜线，但它也可以许多其他情况。对于每个设备，帧中的数据是串行传输的，但如果多个设备同时传输，最高优先级的设备可以继续传输，而其他设备则推出。<em>帧被所有设备接受，包括发送设备</em>。</p>
+<h2 id="can-总线的历史">CAN 总线的历史</h2>
+<h3 id="can-总线的诞生和发展">1983-1991: CAN 总线的诞生和发展</h3>
+<p>CAN 总线最初是由德国博世公司（Bosch），在 1983 年开发，并于 1986
+年首次发布。CAN
+总线最初用于汽车电子系统的通信，并逐渐得到其他领域的广泛应用。在这一时期，CAN
+总线标准得到了进一步完善和发展，包括 CAN 2.0A 和 CAN 2.0B
+等版本的发布。</p>
+<h3 id="年-can-总线的普及和标准化">1991-2000年: CAN
+总线的普及和标准化</h3>
+<p>CAN
+总线在这一时期得到了广泛的应用和推广，成为汽车电子系统、工业控制和自动化领域的主流通信协议。CAN
+总线标准也到了进一步的标准化和完善，包括 ISO 11898 等标准的发布。</p>
+<h3 id="年至今-can-总线的进一步发展和应用扩展">2000年至今: CAN
+总线的进一步发展和应用扩展</h3>
+<p>2012 年，博世发布了CAN FD1.0，即 CAN with Flexible
+Data-Rate。该规范使用不同的帧格式，允许不同的数据长度，并在仲裁决定后可选择切换到更快的比特率。CAN
+FD 与现有的 CAN 2.0 网络兼容，因此新的 CAN FD 设备可以与现有的 CAN
+设备在同一网络中共存。截至 2018 年，博世积极扩展 CAN 标准。</p>
+<h2 id="can-总线的标准">CAN 总线的标准</h2>
+<h3 id="can-2.0a-和-2.0b">1. CAN 2.0A 和 2.0B</h3>
+<p>CAN 2.0A 和 2.0B 是最基本的 CAN 标准，定义了 CAN
+总线上数据的帧格式、速率、物理层等特性，能够支持最高 1 Mbps
+的数据传输速率。其中，CAN 2.0A 标准采用 11
+位标识符（ID）进行帧的识别和过滤，而 CAN 2.0B 标准则采用 29
+位标识符进行帧的识别和过滤。</p>
+<h3 id="iso-11898-2">2. ISO 11898-2</h3>
+<p>ISO 11898-2 是 CAN 总线的物理层规范，主要定义了 CAN
+总线在电气特性方面的规范，包括电压、电流、传输速率、传输距离等。此规范还定义了两根差分信号线（CAN_H
+和 CAN_L）以及地线的连接方式，以保证 CAN 总线的抗干扰能力和可靠性。</p>
+<h3 id="iso-11898-3">3. ISO 11898-3</h3>
+<p>ISO 11898-3 是高速 CAN 总线的物理层规范，定义了在高速传输模式下 CAN
+总线的电气特性和信号波形。在该标准下，CAN 总线的最高传输速率可以达到 1
+Mbps，传输距离可以达到 40 米。</p>
+<h3 id="iso-11898-4">4. ISO 11898-4</h3>
+<p>ISO 11898-4 是低速 CAN 总线的物理层规范，定义了在低速传输模式下 CAN
+总线的电气特性和信号波形。在该标准下，CAN 总线的最高传输速率为 125
+Kbps，传输距离可以达到 500 米。</p>
+<h3 id="sae-j1939">5. SAE J1939</h3>
+<p>SAE J1939 是一种 CAN
+总线协议，主要用于商用车辆和重型机械设备的通信。它定义了 CAN
+总线上的数据格式、物理层、协议等方面的规范，能够实现多节点、高速、实时的数据交换。</p>
+<h3 id="devicenet">6. DeviceNet</h3>
+<p>DeviceNet 是一种 CAN
+总线协议，主要用于工业自动化领域的设备通信。它定义了 CAN
+总线上的数据格式、物理层、协议等方面的规范，能够实现设备的控制和信息交换。'</p>
+<h2 id="物理层标准">物理层标准</h2>
+<h3 id="iso-11898-2-1">ISO 11898-2</h3>
+<blockquote>
+<p><strong>High-speed medium access unit</strong>:</p>
+<p>定义了 CAN
+的高速物理介质附件(HS-PMA)，广泛用于汽车行业的串行通信协议，支持分布式实时控制和多路传输。</p>
+</blockquote>
+<p>HS-PMA
+包括一个传输和一个接受实体。它应能够使连接的物理介质，即两线电缆，相对于公共接地偏压。发送单元在
+CAN_H 和 CAN_L 两根信号线上施加差分电压，以表示逻辑信号 0
+(dominant)，不施加差分电压时，表示逻辑信号 1
+(recessive)，这些信号将被连接在完全相同介质的其他节点所接收。这两个信号是物理介质相关子层的接口。</p>
+<p>HS-PMA 应当提供一个 AUI 给物理编码子层。它包括 TXD 和 RXD 信号以及
+GND。TXD 信号接受来自物理编码子层的 bit 流，并传输给 MDI。RXD 信号将来自
+MDI 的 bit 流发送给物理编码子层。</p>
+<blockquote>
+<p>AUI: attachment unit interface 附件单元接口</p>
+<p>MDI: media dependent interface 介质相关接口</p>
+</blockquote>
+<p>由一个或多个 HS-PMA
+组成的应用至少应支持正常功率运行模式。实现低功耗模式是可选的。</p>
+<table>
+<colgroup>
+<col style="width: 21%" />
+<col style="width: 46%" />
+<col style="width: 32%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Operating mode</th>
+<th>Bus biasing behaviour</th>
+<th>Transmitter behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Normal</td>
+<td>Bus biasing active</td>
+<td>Dominant or recessive</td>
+</tr>
+<tr class="even">
+<td>Low-power</td>
+<td>Bus biasing active or inactive</td>
+<td>Recessive</td>
+</tr>
+</tbody>
+</table>
+<h4 id="hs-pma-测试回路">HS-PMA 测试回路</h4>
+<p>HS-PMA 输出 CAN 信号是由 CAN_H 和 CAN_L 实现的，TXD
+是传输数据输入，RXD
+是接收数据输出。下图展示的外围电路定义所有必需电压电流参数的测量条件。<span
+class="math inline">\(R_L\)</span> 表示 HS-PMA
+在网络中使用时的有效阻性负载（总线负载），<span
+class="math inline">\(C_1\)</span>代表可选的分立终端电容器。</p>
+<p><img src="/img/CAN/test circuit.png" srcset="/img/loading.gif" lazyload style="zoom:20%;" /></p>
+<center>
+HS-PMA test circuit
+</center>
+<blockquote>
+<p><span class="math inline">\(V_\text{Diff}\)</span> differential
+voltage between CAN_H and CAN_L wires</p>
+<p><span class="math inline">\(V_{\text{CAN_H}}\)</span> single ended
+voltage on CAN_H wire</p>
+<p><span class="math inline">\(V_{\text{CAN_L}}\)</span> single ended
+voltage on CAN_L wire</p>
+<p><span class="math inline">\(C_{\text{RXD}}\)</span> capacitive load
+on RXD</p>
+</blockquote>
+<p><img src="/img/CAN/dominant output characteristics.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p>
+<h4 id="发送特性">发送特性</h4>
+<p><img src="/img/CAN/dominant output characteristics 2.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p>
+<p>为了达到可接受的低射频发射水平，发送端应满足下表所要求的驱动信号对称性：</p>
+<p><img src="/img/CAN/driver symmetry.png" srcset="/img/loading.gif" lazyload style="zoom:60%;" /></p>
+<p>发送端的最大输出电流的限制如下：</p>
+<p><img src="/img/CAN/driver output current.png" srcset="/img/loading.gif" lazyload style="zoom:60%;" /></p>
+<p>表5详细说明了总线偏置激活时的隐性输出特性：</p>
+<p><img src="/img/CAN/recessive output characteritics.png" srcset="/img/loading.gif" lazyload style="zoom:60%;" /></p>
+<p>表6详细说明了总线偏置未激活时的隐性输出特性：</p>
+<p><img src="/img/CAN/recessive output characteristics 2.png" srcset="/img/loading.gif" lazyload style="zoom:60%;" /></p>
+<p>HS-PMA 可以限制显性传输的持续时间，防止 TXD
+因为故障持续输出显性，从而干扰其他节点的通信。HS-PMA
+应该在表7中指定的限制范围内实现超时：</p>
+<p><img src="/img/CAN/transmit dominant timeout.png" srcset="/img/loading.gif" lazyload style="zoom:60%;" /></p>
+<blockquote>
+<p><span class="math inline">\(\text{t}_{\text{dom}}\)</span>
+的最小值与最小的比特率之间存在一定的关系。<span
+class="math inline">\(\text{t}_{\text{dom}}\)</span> 的最小值为 0.8
+ms，bit 流大于或等于 21.6 kbit/s 时，可以容纳 17 个连续的显性位；当 bit
+流大于或等于 45.8 kbit/s 时，可以容纳 36 个连续的显性位。值 17 表明 PMA
+尝试发送一个显性位，并且每次在接收数据输入时都看到一个隐性电平。当前五次尝试的最后一位有位错误时，值
+36 反映连续 6 个错误帧。</p>
+</blockquote>
+<h4 id="接收特性">接收特性</h4>
+<p>当 HS-PMA
+处于低功耗模式，并且总线偏置被激活时，隐性和显性状态的差分输入电压范围如表
+8 所示：</p>
+<p><img src="/img/CAN/receiver input characteristics.png" srcset="/img/loading.gif" lazyload style="zoom:60%;" /></p>
+<p>当 HS-PMA
+处于低功耗模式，并且总线偏置未被激活时，隐性和显性状态的差分输入电压范围如表
+9 所示：</p>
+<p><img src="/img/CAN/receiver input characteristics 2.png" srcset="/img/loading.gif" lazyload style="zoom:60%;" /></p>
+<h4 id="接收机的输入阻抗">接收机的输入阻抗</h4>
+<p><img src="/img/CAN/internal differential input resistance.png" srcset="/img/loading.gif" lazyload style="zoom:60%;" /></p>
+<p>HS-PMA 应该具有表 10 给出的输入阻抗：</p>
+<p><img src="/img/CAN/receiver input resistance.png" srcset="/img/loading.gif" lazyload style="zoom:60%;" /></p>
+<p>同时，内部阻抗应当满足表 11 的需求：</p>
+<p><img src="/img/CAN/receiver input resistance matching.png" srcset="/img/loading.gif" lazyload style="zoom:60%;" /></p>
+<h4 id="发送和接收的时序特性">发送和接收的时序特性</h4>
+<p>时序参数应在 HS-PMA 的 RXD 输出和 TXD 输入以及 CAN_H 和 CAN_L
+之间的差压上测量。</p>
+<p>图 5 展示了如何测量信号轨迹中的时序：</p>
+<p><img src="/img/CAN/timing diagram.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p>
+<p>HS-PMA 的循环延时要求：</p>
+<p><img src="/img/CAN/loop delay.png" srcset="/img/loading.gif" lazyload style="zoom:60%;" /></p>
+<blockquote>
+<p>从 TXD 输入端的信号边沿到 RXD
+输出端的下一个具有相同极性的信号边沿的时间跨度，需要考虑两个信号边沿的最大延迟。</p>
+</blockquote>
+<p><img src="/img/CAN/data signal timing.png" srcset="/img/loading.gif" lazyload style="zoom:60%;" /></p>
+<p><img src="/img/CAN/data signal timing 2.png" srcset="/img/loading.gif" lazyload style="zoom:60%;" /></p>
+<h4
+id="textv_textcan_htextv_textcan_l-和-textv_textdiff-的最大额定值"><span
+class="math inline">\(\text{V}_{\text{CAN_H}}\)</span>，<span
+class="math inline">\(\text{V}_{\text{CAN_L}}\)</span> 和 <span
+class="math inline">\(\text{V}_{\text{Diff}}\)</span> 的最大额定值</h4>
+<p>表 15 反映了静态电压的上下限，可以连接到 CAN_H 和 CAN_L
+而不造成损坏，而 <span
+class="math inline">\(\text{V}_{\text{diff}}\)</span>
+则保持在其自身的最大额定值范围内。</p>
+<p><img src="/img/CAN/maximum ratings.png" srcset="/img/loading.gif" lazyload style="zoom:60%;" /></p>
+<h4 id="can_h-和-can_l-的最大漏电流">CAN_H 和 CAN_L 的最大漏电流</h4>
+<p>没有供电的 HS-PMA 不应干扰连接到同一媒介的其他 HS-PMA
+的通信，最大漏电流的要求如表 16 所示：</p>
+<p><img src="/img/CAN/maximum leakage currents.png" srcset="/img/loading.gif" lazyload style="zoom:60%;" /></p>
+<h4 id="低功耗模式的唤醒">低功耗模式的唤醒</h4>
+<p>当由一个或多个 HS-PMA 组成的网络实现低功耗模式时，HS-PMA
+应能够发出唤醒事件信号。表17列出了定义的 HS-PMA 类型所需的唤醒机制：</p>
+<p><img src="/img/CAN/wake-up implementations.png" srcset="/img/loading.gif" lazyload style="zoom:60%;" /></p>
+<p>当一个 HS-PMA 有多个唤醒机制时，这写唤醒机制必须可配置。</p>
+<p><strong>基本的唤醒</strong>：</p>
+<p>当接收到一个持续时间至少为 <span
+class="math inline">\(\text{t}_{\text{Filter}}\)</span>
+的显性状态，就能够触发一个唤醒事件。</p>
+<p><strong>唤醒模式唤醒</strong>：</p>
+<p>当连续接收到两个持续时间至少为 <span
+class="math inline">\(\text{t}_{\text{Filter}}\)</span>
+的显性状态，并被一个持续时间至少为 <span
+class="math inline">\(\text{t}_{\text{Filter}}\)</span>
+的隐性状态隔开时，将发生唤醒事件。</p>
+<p><strong>选择唤醒</strong>：</p>
+<p>一旦检测到一个唤醒帧 (WUF)，将触发唤醒事件。在 CBFF 或 CEFF 中解码
+CAN 帧并接受为 WUF 是由 HS-PMA
+完成的。如果启用，在正常和低功耗模式下都可以解码 CAN 帧。</p>
+<p>在偏置反应时间 <span
+class="math inline">\(\text{t}_\text{Bias}\)</span> 过去后，可以忽略
+CBFF 和 CEFF 中最多 4 帧(当比特率高于 500 kbit/s 时最多 8
+帧)，并且不能忽略 CBFF 和 CEFF 中的任何后续帧。</p>
+<p>在错误通信的情况下，HS-PMA
+应在内部错误计数器溢出时或溢出后发出唤醒信号。</p>
+<ol type="1">
+<li>正常模式到低功耗模式转换时的行为</li>
+</ol>
+<p>如果在模式更改之前启用了选择性唤醒，并且 HS-PMA
+不再忽略帧，则在模式转换期间也应支持 CAN
+数据和远程帧的解码，这些模式转换启用了帧检测 IP。 如果接收到的帧是有效的
+WUF，则收发器应指示唤醒。 如果启用，CAN
+数据的解码应在正常和低功耗模式下实现。</p>
+<ol start="2" type="1">
+<li>位解码</li>
+</ol>
+<p>当 CAN_H 和 CAN_L
+之间的差分电压时序符合以下两种信号之一时，接收到的经典 CAN
+帧应被正确解码:</p>
+<ul>
+<li>bit 流由信号形状A的多个实例组成 (用于处理振铃);</li>
+<li>bit 流可以由信号形状 B1
+的多个实例和信号形状B2的一个实例组装而成(以处理发送方时钟容差和仲裁损失)。</li>
+</ul>
+<p><img src="/img/CAN/Signal shape A and B.png" srcset="/img/loading.gif" lazyload style="zoom:60%;" /></p>
+<ol start="3" type="1">
+<li>唤醒帧</li>
+</ol>
+<p>如果满足以下所有条件，一个有效的典型 CAN 将被认为是一个有效的
+WUF：</p>
+<ul>
+<li>当 DLC 匹配未禁用时，接收到的帧是典型 CAN 数据帧。当 DLC
+匹配被禁用时，帧也可能是远程帧。</li>
+<li>接收到的典型 CAN 帧的 ID 与相关 bit 位的配置 ID (在HS-PMA中)
+完全匹配。相关 bit 的位置是由一个 ID 掩码给出的。</li>
+<li>接收到的典型 CAN 数据帧的 DLC 与配置的 DLC 完全匹配。这个 DLC
+匹配条件可以通过 HS-PMA 实现中的配置禁用。</li>
+<li>当 DLC 大于 0 且启用 DLC
+匹配时，接收到的帧的数据字段在对应于配置的数据掩码中的设置的 bit
+位置上至少设置了一位。</li>
+<li>收到正确的循环冗余校验 (CRC)，包括隐性 CRC 分隔符，并且在确认 (ACK)
+之前未检测到错误。图7描述了被认为是“不关心”的 bit。</li>
+</ul>
+<blockquote>
+<p>DLC: data length code</p>
+</blockquote>
+<p><img src="/img/CAN/do not care bit.png" srcset="/img/loading.gif" lazyload style="zoom:60%;" /></p>
+<ol start="4" type="1">
+<li>帧错误计数机制</li>
+</ol>
+<p>在激活选择唤醒功能和 <span
+class="math inline">\(\text{t}_{\text{Silence}}\)</span> 结束时，错误
+CAN 帧的计数器应设置为零。计数器的初始值为零。当检测到位填充、CRC 或 CRC
+分隔符形式错误时，该计数器将加1。如果已经接收到一个典型 CAN
+帧，并且计数器不为零，那么计数器将减1。在 CRC
+定界符和间歇字段结束之间的显性位不应增加帧错误计数器。</p>
+<p>在此计数器的每次递增或递减时，HS-PMA 中的解码器单元应等待 <span
+class="math inline">\(\text{n}_{\text{Bit}\_\text{idle}}\)</span>
+个隐性位，然后考虑一个显性位作为帧的开始。图8描述了在接收到典型 CAN
+帧和出现错误场景时，强制开始帧 (SOF) 检测的位置。</p>
+<p><img src="/img/CAN/Mandatory SOF detection.png" srcset="/img/loading.gif" lazyload style="zoom:60%;" /></p>
+<p>当计数器达到阈值时，应立即或在下一次接收 WUP
+时进行唤醒。默认阈值是32，其他值可能是可配置的。</p>
+<p>在偏置反应时间 <span
+class="math inline">\(\text{t}_{\text{Bias}}\)</span> 结束后开始的连续 4
+个(比特率&gt; 500 kbit/s时最多 8 个)的典型 CAN
+数据和远程帧可能被忽略(失败时错误计数器没有增加)或被判断为错误(即使没有错误，错误计数器也会增加)。</p>
+<p>接收带有非标称保留位 (SRR, r0)的 CEFF
+帧不会导致错误计数器的增加。</p>
+<ol start="5" type="1">
+<li>唤醒帧 ID</li>
+</ol>
+<p>支持 CAN-ID 掩码机制，以在比较中排除 ID 位。支持 11 位和 29 位的
+CAN-ID 和 ID 掩码。用户选择 WUF 是否必须出现在 CBFF 或 CEFF 中。IDE
+位不是 ID 掩码的一部分。在任何情况下都要进行判别。</p>
+<p>除 "don't care" 外，所有被掩码的 ID 位都与配置的 ID
+位完全匹配。如果掩码 ID 位配置为 "don't care"，则 “1” 和 “0”
+都将被接受。</p>
+<p><img src="/img/CAN/ID masking mechanism.png" srcset="/img/loading.gif" lazyload style="zoom:60%;" /></p>
+<ol start="6" type="1">
+<li>唤醒帧 DLC</li>
+</ol>
+<p>如果启用了 DLC 匹配条件，则只有当接收帧的 DLC 与配置的 DLC
+完全匹配时，典型 CAN 帧才能是有效的 WUF。</p>
+<p>如果 DLC 匹配条件被禁用，则 DLC 和数据字段不被计算，当标识符匹配且
+CRC 正确时，典型 CAN 帧已经是有效的 WUF。</p>
+<ol start="7" type="1">
+<li>唤醒帧的数据域</li>
+</ol>
+<p>如果启用了 DLC 匹配条件，则只有在接收到的 WUF
+的数据字段中至少有一个逻辑 1 位与配置的 WUF 中的数据字段的逻辑 1
+位匹配时，典型 CAN 帧才能是有效的 WUF。</p>
+<p>如果 DLC 匹配条件被禁用，则 DLC 和数据字段不被计算，当标识符匹配且
+CRC 正确时，典型 CAN 帧已经是有效的 WUF。</p>
+<p><img src="/img/CAN/data field within a received Classical CAN data frame.png" srcset="/img/loading.gif" lazyload style="zoom:60%;" /></p>
+<p>使用该机制，只需一个唤醒帧就可以唤醒 64 个独立的 ECU 组。</p>
+<h4 id="总线偏置-bus-biasing">总线偏置 (Bus biasing)</h4>
+<p>当 HS-PMA
+具有低功耗模式和选择性唤醒时，需要自动电压偏置。对于所有其他
+HS-PMA，应实现正常偏置或自动电压偏置。</p>
+<ol type="1">
+<li>正常偏置</li>
+</ol>
+<p>正常偏置意味着总线偏置在正常模式下激活，在低功率模式下不激活。</p>
+<ol start="2" type="1">
+<li>自动电压偏置</li>
+</ol>
+<p>自动电压偏置是指在正常模式下总线偏置是激活的，在低功耗模式下由 CAN_H
+和 CAN_L 之间的电压差控制。下面的状态机说明了这种机制。</p>
+<p><img src="/img/CAN/Bus biasing control for automatic voltage biasing.png" srcset="/img/loading.gif" lazyload style="zoom:30%;" /></p>
+<p>图 11 中的状态机定义了所有操作模式的总线偏置行为。进入状态 1
+时，可选定时器 <span
+class="math inline">\(\text{t}_{\text{Wake}}\)</span>
+复位并重新启动；当进入状态 3 或 4 时，定时器 <span
+class="math inline">\(\text{t}_{\text{Silence}}\)</span>
+复位并重新启动。</p>
+<p>表 20 指定了总线偏置控制时间，图 12 为偏置反应时间。</p>
+<p><img src="/img/CAN/HS-PMA bus biasing control timings.png" srcset="/img/loading.gif" lazyload style="zoom:60%;" /></p>
+<p><img src="/img/CAN/Test signal definition for bias reaction time measurement.png" srcset="/img/loading.gif" lazyload style="zoom:60%;" /></p>
+<h2 id="数据链路层协议">数据链路层协议</h2>
+<h3 id="can-的特点">CAN 的特点</h3>
+<p><strong>（1） 多主控制</strong></p>
+<p>当总线处于空闲状态时，所有的节点都可向总线发送消息。最先访问总线的节点可获得总线的发送权。当有多个节点同时向总线发送消息时，发送高优先级
+ID 消息的节点可获得总线的发送权。</p>
+<p><strong>（2）消息的发送</strong></p>
+<p>在 CAN
+协议中，所有的消息都以统一的格式发送。总线处于空闲状态时，总线上的所有节点都可以向总线发送消息。当有多个节点同时向总线发送消息时，根据标识符
+（Identifier, ID) 决定优先级。ID
+并不是标识消息发送的目的地址，而是表示访问总线的消息的优先级。两个以上的节点同时开始发送消息时，对各个消息
+ID
+的每个位进行逐个仲裁比较。仲裁获胜（被判定为优先级最高）的节点继续发送消息，仲裁失利的节点则立刻停止发送而进行接收工作。</p>
+<p><strong>（3）系统的柔软性</strong></p>
+<p>与总线相连的节点没有类似于“地址”的信息。因此在总线上增加节点时，连接在总线上的其它节点的软硬件及应用层都不需要做任何改变。</p>
+<p><strong>（4）通信速度</strong></p>
+<p>根据整个网络的规模，可设定合适的通信速度。在同一网络的中，所有的节点必须设定为统一的速度。即使有一个节点的通信速度与其它节点不同，该节点也将会输出错误信号，妨碍整个网络的通信。不同的网络则可以设置不同的通信速度。</p>
+<p><strong>（5）远程数据请求</strong></p>
+<p>可通过发送 “遥控帧” 请求其它节点发送数据。</p>
+<p><strong>（6）错误检测功能·错误通知功能·错误恢复功能</strong></p>
+<p>所有节点都可以检测错误（错误检测功能）。检测出错误的节点会立即通知其它所有节点（错误通知功能）。正在发送消息的节点一旦检测出错误，会强制结束当前的发送。强制结束发送的节点会不断重新发送此消息直到成功为止（错误恢复功能）。</p>
+<p><strong>（7）故障封闭</strong></p>
+<p>CAN
+可以判断出错误的类型是总线上暂时的数据错误（如外部噪声）还是持续的数据错误（如节点内部故障、驱动器故障、断线等）。由此功能，当总线上发生持续数据错误时，可将引起此故障的节点从总线上隔离出去。</p>
+<p><strong>（8）连接</strong></p>
+<p>CAN
+总线是可同时连接多个节点的总线。可连接的节点总数在理论上是没有限制的。但实际应用的过程中，可连接的节点数受总线上的时间延迟及电气负载的限制。<em>降低通信速度，可连接的节点数增加；提高通信速度，则可连接的节点数减少。</em></p>
+<h3 id="can-的错误">CAN 的错误</h3>
+<h4 id="错误的种类">错误的种类</h4>
+<p>节点始终处于3 种状态之一。</p>
+<p><strong>（1）主动错误状态</strong></p>
+<p>主动错误状态是可以正常参加总线通信的状态。处于主动错误状态的节点检测出错误时，输出主动错误标志。</p>
+<p><strong>（2）被动错误状态</strong></p>
+<p>被动错误状态是易引起错误的状态。处于被动错误状态的节点虽然能够参加总线通信，但是为了不妨碍其它节点通信，接收时不能积极地发送错误通知。处于被动错误状态的节点即使检测出错误，而其它处于主动错误状态的节点如果没有发现错误，整个总线也被认为是没有错误的。处于被动错误状态的节点检测出错误时，输出被动错误标志。</p>
+<p>处于被动错误状态的节点在发送结束后不能立刻再次开始发送。在开始下次发送前，在间隔帧期间内必须插入
+“延迟传送”（8 个隐性位）</p>
+<p><strong>（3）总线关闭态</strong></p>
+<p>总线关闭态是不能参加总线上通信的状态。消息的接受和发送都是禁止的。</p>
+<blockquote>
+<p>这些状态依靠发送错误的计数和接收错误的计数来管理的，根据计数值决定进入那种状态。错误状态和计数值的关系如下：</p>
+</blockquote>
+<p><img src="/img/CAN/错误计数值.png" srcset="/img/loading.gif" lazyload style="zoom:20%;" /></p>
+<p><img src="/img/CAN/节点错误状态.png" srcset="/img/loading.gif" lazyload style="zoom:20%;" /></p>
+<h4 id="错误计算值">错误计算值</h4>
+<p>发送错误计数值和接收错误计数值根据一定的条件发送变化。错误计数值的变动条件如下表所示。一次数据的接收和发送可能同时满足多个条件。错误计数器在错误标志的第一个位出现的时间点上开始计数。</p>
+<table>
+<colgroup>
+<col style="width: 44%" />
+<col style="width: 14%" />
+<col style="width: 40%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">接受和发送错误计数值的变动条件</th>
+<th style="text-align: center;">发送错误计数值 (TEC)</th>
+<th style="text-align: center;">接收错误计数值 (REC)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td
+style="text-align: left;">接收节点检测出错误时。<br/>例外：接收单元在发送错误标志或过载标志中检测出“位错误”时，接收错误计数值不增加。</td>
+<td style="text-align: center;">——</td>
+<td style="text-align: center;">+1</td>
+</tr>
+<tr class="even">
+<td
+style="text-align: left;">接收节点在发送完错误标志后检测到的第一个位为显性电平时。</td>
+<td style="text-align: center;">——</td>
+<td style="text-align: center;">+8</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">发送节点在输出错误标志时。</td>
+<td style="text-align: center;">+8</td>
+<td style="text-align: center;">——</td>
+</tr>
+<tr class="even">
+<td
+style="text-align: left;">发送节点在发送主动错误标志或过载标志时，检测出位错误。</td>
+<td style="text-align: center;">+8</td>
+<td style="text-align: center;">——</td>
+</tr>
+<tr class="odd">
+<td
+style="text-align: left;">接收节点在发送主动错误标志或过载标志时，检测出位错误。</td>
+<td style="text-align: center;">——</td>
+<td style="text-align: center;">+8</td>
+</tr>
+<tr class="even">
+<td
+style="text-align: left;">各节点从主动错误标志、过载标志的最开始检测出连续
+14 个位的显性位时。之后，每检测出连续的 8 个位的显性位时。</td>
+<td style="text-align: center;">发送时 +8</td>
+<td style="text-align: center;">接收时 +8</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">检测出在被动错误标志后追加的连续 8
+个位的显性位时。</td>
+<td style="text-align: center;">发送时 +8</td>
+<td style="text-align: center;">接收时 +8</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">发送单元正常发送数据结束时（返回 ACK
+且到帧结束也未检测出错误时）。</td>
+<td style="text-align: center;">-1 (TEC=0 时 <span
+class="math inline">\(\pm0\)</span>)</td>
+<td style="text-align: center;">——</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">接收单元正常接收数据结束时（到 CRC
+未检测出错误且正常返回 ACK 时）。</td>
+<td style="text-align: center;">——</td>
+<td style="text-align: center;"><span
+class="math inline">\(1≤REC≤127,-1\)</span><br/><span
+class="math inline">\(REC=0,±0\)</span><br/><span
+class="math inline">\(REC&gt;127,设 REC=127\)</span></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">处于总线关闭态的单元，检测到 128 次连续 11
+个位的隐性位。</td>
+<td style="text-align: center;">TEC=0</td>
+<td style="text-align: center;">REC=0</td>
+</tr>
+</tbody>
+</table>
+<h3 id="can-协议">CAN 协议</h3>
+<h4 id="帧的种类">帧的种类</h4>
+<p>通信是通过以下 5 种类型的帧进行的。</p>
+<ul>
+<li>数据帧</li>
+<li>遥控帧</li>
+<li>错误帧</li>
+<li>过载帧</li>
+<li>帧间隔</li>
+</ul>
+<p><strong>数据帧</strong>和<strong>遥控帧</strong>有标准格式和扩展格式两种格式。标准格式有11
+个位的标识符 (ID)，扩展格式有 29 个位的 ID。</p>
+<table>
+<thead>
+<tr class="header">
+<th>帧</th>
+<th>帧用途</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>数据帧</td>
+<td>用于发送节点向接收节点传送数据的帧。</td>
+</tr>
+<tr class="even">
+<td>遥控帧</td>
+<td>用于接收节点向具有相同 ID 的发送节点请求数据的帧。</td>
+</tr>
+<tr class="odd">
+<td>错误帧</td>
+<td>用于当检测出错误时向其它节点通知错误的帧。</td>
+</tr>
+<tr class="even">
+<td>过载帧</td>
+<td>用于接收节点通知其尚未做好接收准备的帧。</td>
+</tr>
+<tr class="odd">
+<td>帧间隔</td>
+<td>用于将数据帧及遥控帧与前面的帧分离开来的帧。</td>
+</tr>
+</tbody>
+</table>
+<h5 id="数据帧">数据帧</h5>
+<p>数据帧由 7 个段构成：</p>
+<ul>
+<li>帧起始：表示数据帧开始的段。</li>
+<li>仲裁段：表示该帧优先级的段。</li>
+<li>控制段：表示数据的字节数及保留位的段。</li>
+<li>数据段：数据的内容，可发送 0～8 个字节的数据。</li>
+<li>CRC 段：检查帧的传输错误的段。</li>
+<li>ACK 段：表示确认正常接收的段。</li>
+<li>帧结束：表示数据帧结束的段。</li>
+</ul>
+<p><img src="/img/CAN/数据帧.png" srcset="/img/loading.gif" lazyload style="zoom:30%;" /></p>
+<p><strong>(1) 帧起始（标准、扩展格式相同）</strong></p>
+<p>表示帧开始的段，1
+个位<strong>显性位</strong>。只有在总线空闲期间节点才能够发送 SOF.</p>
+<p><strong>(2) 仲裁段</strong></p>
+<p>表示数据优先级的段。</p>
+<p>标准帧有 11 位 ID，扩展帧有 29 位 ID。</p>
+<p>RTR 位：用于区分数据帧和遥控帧</p>
+<ul>
+<li>0：数据帧</li>
+<li>1：遥控帧</li>
+</ul>
+<p>IDE 位：用于区分标准帧和扩展帧</p>
+<ul>
+<li>0：标准帧</li>
+<li>1：扩展帧</li>
+</ul>
+<p>SSR 位：表明该位置代替了标准帧中的 RTR（无实际意义，SSR永远置 1）</p>
+<blockquote>
+<p>标准帧的 ID 有 11 个位。从 ID28 到 ID18 被依次发送。禁止高7
+位都为隐性。（禁止设定：ID=1111111XXXX）</p>
+<p>扩展帧的 ID 有 29 个位。基本 ID 从 ID28 到 ID18，扩展 ID 由 ID17 到
+ID0 表示。基本 ID 和标准帧的 ID 相同。禁止高 7
+位都为隐性。（禁止设定：基本 ID=1111111XXXX）</p>
+</blockquote>
+<p><strong>(3) 控制段</strong></p>
+<p>控制段由 6
+个位构成，表示数据段的字节数。标准帧和扩展帧的构成有所不同。</p>
+<blockquote>
+<ol type="1">
+<li><p>保留位（r0、r1）</p>
+<p>保留位必须全部以显性电平发送。但接收方可以接收显性、隐性及其任意组合的电平。</p></li>
+<li><p>数据长度码（DLC）
+数据长度码与数据的字节数的对应关系如下表所示。数据的字节数必须为 0～8
+字节。但接收方对 DLC = 9～15 的情况并不视为错误。</p>
+<p><img src="/img/CAN/数据长度码和字节数的关系.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p></li>
+</ol>
+</blockquote>
+<p><strong>(4) 数据场（标准帧和扩展帧相同）</strong></p>
+<ul>
+<li>具有 0-8 个字节长度，由 DLC 确定</li>
+<li>包含 CAN 数据帧发送的内容</li>
+</ul>
+<p><strong>(5) CRC 段（标准/扩展格式相同）</strong></p>
+<p>CRC 段是检查帧传输错误的帧。由15 个位的 CRC 顺序和 1 个位的 CRC
+界定符（用于分隔的位）构成。</p>
+<blockquote>
+<p>CRC 顺序是根据多项式生成的 CRC 值，CRC
+的计算范围包括<strong>帧起始、仲裁段、控制段、数据段</strong>。
+接收方以同样的算法计算 CRC 值并进行比较，不一致时会通报错误。</p>
+</blockquote>
+<p><strong>(6) ACK 段</strong> ACK 段用来确认是否正常接收。由 ACK 槽
+(ACK Slot)和 ACK 界定符 2 个位构成。</p>
+<blockquote>
+<ol type="1">
+<li>发送节点的ACK 段 发送节点在 ACK 段发送 2 个位的隐性位。</li>
+<li>接收节点的 ACK 段 接收到正确消息的节点在 ACK 槽(ACK
+Slot)发送显性位，通知发送节点正常接收结束。这称作“发送ACK”或者“返回ACK”。</li>
+</ol>
+</blockquote>
+<p><strong>(7) 帧结束</strong> 帧结束是表示该该帧的结束的段。由 7
+个位的<strong>隐性位</strong>构成。</p>
+<h5 id="遥控帧">遥控帧</h5>
+<p>接收节点向发送节点请求发送数据所用的帧。遥控帧由 6
+个段组成。遥控帧没有数据帧的数据段。</p>
+<ul>
+<li>帧起始（SOF）：表示帧开始的段。</li>
+<li>仲裁段：表示该帧优先级的段。可请求具有相同 ID 的数据帧。</li>
+<li>控制段：表示数据的字节数及保留位的段。</li>
+<li>CRC 段：检查帧的传输错误的段。</li>
+<li>ACK 段：表示确认正常接收的段。</li>
+<li>帧结束：表示遥控帧结束的段。</li>
+</ul>
+<p><img src="/img/CAN/遥控帧.png" srcset="/img/loading.gif" lazyload style="zoom:30%;" /></p>
+<blockquote>
+<p>遥控帧和数据帧</p>
+<ul>
+<li>数据帧和遥控帧的不同
+<ul>
+<li>遥控帧的 RTR 位为隐性位，没有数据段</li>
+<li>没有数据的数据帧和遥控帧可通过 RTR 位来区分</li>
+</ul></li>
+<li>遥控帧没有数据段，数据长度码该如何表示？
+<ul>
+<li>遥控帧的数据长度码以所请求数据帧的数据长度码表示。</li>
+</ul></li>
+<li>没有数据段的数据帧有何用途？
+<ul>
+<li>可用于各节点的定期连接确认/应答、或仲裁段本身带有实质性信息的情况下。</li>
+</ul></li>
+</ul>
+</blockquote>
+<h5 id="错误帧">错误帧</h5>
+<p>用于在接收和发送消息时检测出错误通知错误的帧。错误帧由错误标志和错误界定符构成。</p>
+<p><strong>(1) 错误标志</strong></p>
+<p>错误标志包括<em>主动错误标志</em>和<em>被动错误标志</em>两种。</p>
+<ul>
+<li>主动错误标志：6 个位的<strong>显性位</strong>。</li>
+<li>被动错误标志：6 个位的<strong>隐性位</strong>。</li>
+</ul>
+<p><strong>(2) 错误界定符</strong> 错误界定符由 8
+个位的<strong>隐性位</strong>构成。</p>
+<p><img src="/img/CAN/错误帧.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p>
+<blockquote>
+<ol type="1">
+<li>主动错误标志：处于主动错误状态的节点检测出错误时输出的错误标志。</li>
+<li>被动错误标志：处于被动错误状态的节点检测出错误时输出的错误标志。</li>
+</ol>
+</blockquote>
+<h5 id="过载帧">过载帧</h5>
+<p>过载帧是用于接收节点通知其尚未完成接收准备的帧。过载帧由过载标志和过载界定符构成。</p>
+<p><strong>(1) 过载标志</strong></p>
+<p>6 个位的<strong>显性位</strong>。
+过载标志的构成与主动错误标志的构成相同。</p>
+<p><strong>(2) 过载界定符</strong></p>
+<p>8 个位的<strong>隐性位</strong>。
+过载界定符的构成与错误界定符的构成相同。</p>
+<p><img src="/img/CAN/过载帧.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p>
+<h5 id="帧间隔">帧间隔</h5>
+<p>帧间隔是用于分隔数据帧和遥控帧的帧。数据帧和遥控帧可通过插入帧间隔将本帧与前面的任何帧（数据帧、遥控帧、错误帧、过载帧）分开。</p>
+<p><strong>过载帧和错误帧前不能插入帧间隔。</strong></p>
+<p><img src="/img/CAN/帧间隔.png" srcset="/img/loading.gif" lazyload style="zoom:50%;" /></p>
+<p><strong>(1) 间隔</strong></p>
+<p>3 个位的<strong>隐性位</strong>。</p>
+<p><strong>(2) 总线空闲</strong></p>
+<p><strong>隐性电平</strong>，无长度限制（0
+亦可）。本状态下，可视为总线空闲，要发送的节点可开始访问总线。</p>
+<p><strong>(3) 延迟传送（发送暂时停止）</strong></p>
+<p>8
+个位的<strong>隐性位</strong>。只在处于被动错误状态的节点刚发送一个消息后的帧间隔中包含的段。</p>
+<h5 id="优先级仲裁">优先级仲裁</h5>
+<p>在总线空闲态，最先开始发送消息的节点获得发送权。</p>
+<p>多个节点同时开始发送时，各发送节点从仲裁段的第一位开始进行仲裁。连续输出显性电平最多的节点可继续发送。</p>
+<p><img src="/img/CAN/仲裁过程.png" srcset="/img/loading.gif" lazyload style="zoom:30%;" /></p>
+<p><strong>(1) 数据帧何遥控帧的优先级</strong></p>
+<p>具有相同 ID
+的数据帧和遥控帧在总线上竞争时，仲裁段的最后一位（RTR）为显性位的数据帧具有优先权，可继续发送。</p>
+<p><strong>(2) 标准帧和扩展帧的优先级</strong></p>
+<p>标准格式 ID 与具有相同 ID
+的遥控帧或者扩展格式的数据帧在总线上竞争时，标准格式的 RTR
+位为显性位的具有优先权，可继续发送。</p>
+<h5 id="位填充">位填充</h5>
+<p>位填充是为防止突发错误而设定的功能。当连续输出 5
+个相同极性的数据时，插入一个反极性的数据。</p>
+<p><img src="/img/CAN/位填充.png" srcset="/img/loading.gif" lazyload style="zoom:30%;" /></p>
+<p><strong>(1) 发送节点的工作</strong></p>
+<p>在发送数据帧和遥控帧时，SOF～CRC 段间的数据，输出 5
+个相同极性的电平，插入一个反极性的电平。</p>
+<p><strong>(2) 接收节点的工作</strong></p>
+<p>在接收数据帧和遥控帧时，SOF～CRC 段间的数据，如果接收连续 5
+个极性相同的位，则删除下一位，再继续接收。如果受到连续 6
+个相同极性的电平，将被视为错误并发送错误帧。</p>
+<h5 id="错误的种类-1">错误的种类</h5>
+<p>错误共有 5 种。多种错误可能同时发生。</p>
+<ul>
+<li>位错误</li>
+<li>填充错误</li>
+<li>CRC 错误</li>
+<li>格式错误</li>
+<li>ACK 错误</li>
+</ul>
+<p><img src="/img/CAN/错误的种类.png" srcset="/img/loading.gif" lazyload style="zoom:60%;" /></p>
+<p><strong>(1) 位错误</strong></p>
+<ul>
+<li>位错误由向总线上输出数据帧、遥控帧、错误帧、过载帧的节点和输出 ACK
+的节点、输出错误的节点来检测。</li>
+<li>在仲裁段输出隐性电平，但检测出显性电平时，将被视为仲裁失利，而不是位错误。</li>
+<li>在仲裁段作为填充位输出隐性电平时，但检测出显性电平时，将不视为位错误，而是填充错误。</li>
+<li>发送单元在 ACK
+段输出隐性电平，但检测到显性电平时，将被判断为其它节点的 ACK
+应答，而非位错误。</li>
+<li>输出被动错误标志（6
+个位隐性位）但检测出显性电平时，将遵从错误标志的结束条件，等待检测出连续相同6
+个位的值（显性或隐性），并不视为位错误。</li>
+</ul>
+<p><strong>(2) 格式错误</strong></p>
+<ul>
+<li>即使接收节点检测出 EOF（7 个位的隐性位）的最后一位（第8
+个位）为显性电平，也不视为格式错误。</li>
+<li>即使接收节点检测出数据长度码 (DLC) 中 9∼15
+的值时，也不视为格式错误。</li>
+</ul>
+<h5 id="错误帧的输出">错误帧的输出</h5>
+<p>检测出满足错误条件的节点输出错误标志通报错误。</p>
+<p>处于主动错误状态的节点输出的错误标志为主动错误标志；处于被动错误状态的节点输出的错误标志为被动错误标志。</p>
+<p>发送节点发送完错误帧后，将再次发送数据帧或遥控帧。</p>
+<p><img src="/img/CAN/错误标志输出时序.png" srcset="/img/loading.gif" lazyload style="zoom:60%;" /></p>
+<h5 id="位时序">位时序</h5>
+<p>由发送节点在非同步的情况下发送的每秒钟的位数称为位速率。一个位可分为
+4 段。</p>
+<ul>
+<li><p>同步段（SS）</p></li>
+<li><p>传播时间段（PTS）</p></li>
+<li><p>相位缓冲段1（PBS1）</p></li>
+<li><p>相位缓冲段2（PBS2）</p></li>
+</ul>
+<p>这些段又由可称为 Time Quantum（以下称为 Tq）的最小时间单位构成。</p>
+<p>1 位分为 4 个段，每个段又由若干个 Tq
+构成，这称为<strong>位时序</strong>。</p>
+<p>1 位由多少个 Tq 构成、每个段又由多少个 Tq
+构成等，可以任意设定位时序。通过设定位时序，多个节点可同时采样，也可任意设定采样点。</p>
+<p><img src="/img/CAN/段及其作用.png" srcset="/img/loading.gif" lazyload style="zoom:60%;" /></p>
+<p><img src="/img/CAN/位时序.png" srcset="/img/loading.gif" lazyload style="zoom:30%;" /></p>
+<blockquote>
+<p>采样点就是读取总线电平，并将读到的电平作为位值的点。</p>
+</blockquote>
+<h5 id="同步方法">同步方法</h5>
+<p>CAN 协议的通信方法为 NRZ（Non-Return to
+Zero）方式。各个位的开头或者结尾都没有附加同步信号。发送节点以与位时序同步的方式开始发送数据。另外，接收节点根据总线上电平的变化进行同步并进行接收工作。</p>
+<p>但是，发送节点和接收节点存在的时钟频率误差及传输路径上的（电缆、驱动器等）相位延迟会引起同步偏差。因此接收节点通过硬件同步或者再同步的方法调整时序进行接收。</p>
+<h5 id="硬件同步">硬件同步</h5>
+<p>接收节点在总线空闲状态检测出帧起始时进行的同步调整。</p>
+<p>在检测出边沿的地方不考虑 SJW 的值而认为是 SS 段。</p>
+<blockquote>
+<p>SJW: reSynchronization Jump Width 再同步补偿宽度</p>
+</blockquote>
+<p><img src="/img/CAN/硬件同步.png" srcset="/img/loading.gif" lazyload style="zoom:30%;" /></p>
+<h5 id="再同步">再同步</h5>
+<p>在接收过程中检测出总线上的电平变化时进行的同步调整。</p>
+<p>每当检测出边沿时，根据 SJW 值通过加长 PBS1 段，或缩短 PBS2
+段，以调整同步。但如果发生了超出 SJW 值的误差时，最大调整量不能超过 SJW
+值。</p>
+<p><img src="/img/CAN/再同步.png" srcset="/img/loading.gif" lazyload style="zoom:30%;" /></p>
+<h5 id="调整同步的规则">调整同步的规则</h5>
+<ol type="1">
+<li><p>1 个位中只进行一次同步调整。</p></li>
+<li><p>只有当上次采样点的总线值和边沿后的总线值不同时，该边沿才能用于调整同步。</p></li>
+<li><p>在总线空闲且存在隐性电平到显性电平的边沿时，则一定要进行硬件同步。</p></li>
+<li><p>在总线非空闲时检测到的隐性电平到显性电平的边沿如果满足条件 (1) 和
+(2)，将进行再同步。但还要满足下面条件。</p></li>
+<li><p>发送节点观测到自身输出的显性电平有延迟时不进行再同步。</p></li>
+<li><p>发送节点在帧起始到仲裁段有多个单元同时发送的情况下，对延迟边沿不进行再同步。</p></li>
+</ol>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E9%80%9A%E4%BF%A1%E5%8D%8F%E8%AE%AE/">通信协议</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/CAN-%E6%80%BB%E7%BA%BF/">CAN 总线</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/04/14/DSAA/%E9%93%BE%E8%A1%A8/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">链表 linked list</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/03/21/Electronic/E96%E7%B3%BB%E5%88%97%E7%94%B5%E9%98%BB%E6%A0%87%E7%A7%B0%E9%98%BB%E5%80%BC/">
+                        <span class="hidden-mobile">E96 系列电阻标称阻值</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://blog.xuyinsong.cn" target="_blank" rel="nofollow noopener"><span>Anson</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        loader: {
+          load: ['ui/lazy']
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
