@@ -672,8 +672,7 @@
                 };
 
                 function ie(e, t, n, i, r, o) {
-                    /*
-                var c = Object(a["I"])("SubTitle"),
+		var c = Object(a["I"])("SubTitle"),
                     s = Object(a["I"])("ob-skeleton");
                 return Object(a["A"])(), Object(a["g"])("div", G, [Object(a["j"])(c, {
                     title: "titles.recent_comment",
@@ -693,7 +692,7 @@
                     }, null, 8, ["src"]), Object(a["j"])("div", W, [Object(a["j"])("div", K, [Object(a["j"])("span", J, [Object(a["i"])(Object(a["M"])(t.user.login) + " ", 1), t.is_admin ? (Object(a["A"])(), Object(a["g"])("b", Y, Object(a["M"])(e.t("settings.admin-user")), 1)) : Object(a["h"])("", !0)]), Object(a["j"])("p", Q, Object(a["M"])(t.created_at), 1)]), Object(a["j"])("div", X, Object(a["M"])(t.body), 1)])])
                 })), 128)) : (Object(a["A"])(), Object(a["g"])(a["a"], {
                     key: 1
-                }, Object(a["G"])(7, (function(e) {
+                }, Object(a["G"])(2, (function(e) {
                     return Object(a["j"])("li", {
                         class: "\n            bg-ob-deep-900\n            px-2\n            py-3\n            mb-1.5\n            rounded-lg\n            flex flex-row\n            justify-items-center\n            items-center\n            shadow-sm\n            hover:shadow-ob\n            transition-shadow\n          ",
                         key: e
@@ -718,9 +717,7 @@
                         width: "126px"
                     })])])])
                 })), 64))])]) 
-                */
             }
-            
             var re = n("ade3"),
                 oe = n("d4ec"),
                 ce = n("bee2"),
@@ -1180,7 +1177,7 @@
                         }
                     }
                 });
-            ye.render = ie;
+            // ye.render = ie;
             var Me = ye,
                 xe = (n("a4d3"), n("e01a"), Object(a["W"])("data-v-6477376e"));
             Object(a["D"])("data-v-6477376e");
@@ -4249,14 +4246,12 @@
                 }
             });
             ne.render = te;
-            var ae = ne;
-                /*
+	    var ae = ne,	
                 ie = (n("cb29"), Object(a["j"])("path", {
                     "fill-rule": "evenodd",
                     "clip-rule": "evenodd",
-                    // d: "M4.52208 7.71754C7.5782 7.71754 10.0557 5.24006 10.0557 2.18394C10.0557 1.93498 10.0392 1.68986 10.0074 1.44961C9.95801 1.07727 10.3495 0.771159 10.6474 0.99992C12.1153 2.12716 13.0615 3.89999 13.0615 5.89383C13.0615 9.29958 10.3006 12.0605 6.89485 12.0605C3.95334 12.0605 1.49286 10.001 0.876728 7.24527C0.794841 6.87902 1.23668 6.65289 1.55321 6.85451C2.41106 7.40095 3.4296 7.71754 4.52208 7.71754Z"
+                    d: "M4.52208 7.71754C7.5782 7.71754 10.0557 5.24006 10.0557 2.18394C10.0557 1.93498 10.0392 1.68986 10.0074 1.44961C9.95801 1.07727 10.3495 0.771159 10.6474 0.99992C12.1153 2.12716 13.0615 3.89999 13.0615 5.89383C13.0615 9.29958 10.3006 12.0605 6.89485 12.0605C3.95334 12.0605 1.49286 10.001 0.876728 7.24527C0.794841 6.87902 1.23668 6.65289 1.55321 6.85451C2.41106 7.40095 3.4296 7.71754 4.52208 7.71754Z"
                 }, null, -1)); 
-                */ 
 
             function re(e, t, n, i, r, o) {
                 var c = Object(a["I"])("Toggle");
